@@ -35,6 +35,7 @@ brew cask install slack
 brew cask install wechat
 brew cask install wechatwork
 brew cask install qq
+brew cask install dingtalk
 
 # Entertainment
 brew cask install iina
