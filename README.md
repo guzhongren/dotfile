@@ -7,5 +7,5 @@ A list of script to setup your PC.
 ## Uase
 
 ```shell
-sh *.sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/guzhongren/awesome-setup/main/bin/mac-setup)"
 ```

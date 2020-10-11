@@ -48,6 +48,7 @@ brew cask install zeplin
 # Dev tools
 brew install wget telnet curl zsh go python@3 node kubernetes-cli
 brew cask install pgadmin4
+brew install shellcheck
 
 # Install Fonts
 brew tap homebrew/cask-fonts
