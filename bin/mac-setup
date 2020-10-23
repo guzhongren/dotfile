@@ -47,7 +47,7 @@ brew cask install zeplin
 
 
 # Dev tools
-brew install wget telnet curl zsh go python@3 node kubernetes-cli jsonpp
+brew install wget telnet curl zsh go python@3 node kubernetes-cli jsonpp watch tree
 brew cask install pgadmin4
 brew install shellcheck
 
