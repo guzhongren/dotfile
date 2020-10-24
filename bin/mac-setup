@@ -1,56 +1,76 @@
 #!/bin/bash
-# Install Oy my zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+function basic() {
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+}
 
-# Install brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+function efficient() {
+  brew cask install cheatsheet
+  brew cask install dash
+  brew cask install alfred
+  brew cask install itsycal
+  brew cask install tencent-lemon
+}
 
-# Efficient
-brew cask install cheatsheet
-brew cask install dash
-brew cask install alfred
-brew cask install itsycal
-brew cask install tencent-lemon
+function daily() {
+  brew cask install google-chrome
+  brew cask install zoomus
+  brew cask install iterm2
+  brew cask install docker
+  brew cask install postman
+  brew cask install notion
+  brew cask install visual-studio-code
+  brew cask install intellij-idea
+  brew cask install microsoft-outlook
+  brew cask install microsoft-powerpoint
+  brew cask install microsoft-word
+  brew cask install microsoft-auto-update
+  brew cask install xmind
+  brew cask install bitwarden
+  brew cask install shadowsocksx-ng
+  brew cask install the-unarchiver
+  brew cask install baidunetdisk
+}
 
-# Daily
-brew cask install google-chrome
-brew cask install zoomus
-brew cask install iterm2
-brew cask install docker
-brew cask install postman
-brew cask install notion
-brew cask install visual-studio-code
-brew cask install intellij-idea
-brew cask install microsoft-outlook
-brew cask install microsoft-powerpoint
-brew cask install microsoft-word
-brew cask install microsoft-auto-update
-brew cask install xmind
-brew cask install bitwarden
-brew cask install shadowsocksx-ng
-brew cask install the-unarchiver
-brew cask install baidunetdisk
-# Chat
-brew cask install slack
-brew cask install wechat
-brew cask install wechatwork
-brew cask install qq
-brew cask install dingtalk
+function chat() {
+  brew cask install slack
+  brew cask install wechat
+  brew cask install wechatwork
+  brew cask install qq
+  brew cask install dingtalk
+}
 
-# Entertainment
-brew cask install iina
-brew cask install neteasemusic
+function entertainment() {
+  brew cask install iina
+  brew cask install neteasemusic
+}
 
-# Design
-brew cask install figma
-brew cask install zeplin
+function design() {
+  brew cask install figma
+  brew cask install zeplin
+}
 
 
-# Dev tools
-brew install wget telnet curl zsh go python@3 node kubernetes-cli jsonpp watch tree
-brew cask install pgadmin4
-brew install shellcheck
+function devTools() {
+  brew install wget telnet curl zsh go python@3 node kubernetes-cli jsonpp watch tree
+  brew cask install pgadmin4
+  brew install shellcheck
+}
 
-# Install Fonts
-brew tap homebrew/cask-fonts
-brew cask install font-open-sans
+function font() {
+  brew tap homebrew/cask-fonts
+  brew cask install font-open-sans
+}
+
+function main() {
+  basic
+  efficient
+  daily
+  chat
+  entertainment
+  design
+  devTools
+  font
+}
+
+main
