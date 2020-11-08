@@ -53,6 +53,7 @@ function design() {
 
 function devTools() {
   brew install wget telnet curl zsh go python@3 node kubernetes-cli jsonpp watch tree
+  brew install ack
   brew cask install pgadmin4
   brew install shellcheck
 }
