@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/c4/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -117,7 +117,7 @@ source <(kubectl completion zsh)
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-export ANDROID_HOME=/Users/c4/Library/Android/sdk
+export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/tools:$PATH
 
@@ -128,7 +128,7 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export CARGO_INCREMENTAL=0
-export PATH="/Users/c4/.deno/bin:$PATH"
+export PATH="$HOME/.deno/bin:$PATH"
 fpath=(~/.zsh $fpath)
 autoload -Uz compinit
 compinit -u
