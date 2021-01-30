@@ -1,0 +1,24 @@
+---
+version: "2.1"
+services:
+  code-server:
+    image: codercom/code-server:latest
+    container_name: code-server
+    environment:
+      - DOCKER_USER:tencent
+    volumes:
+      - /home/tencent/.config:/home/coder/.config
+      - /home/tencent:/home/coder/project
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+  theia:
+    image: theiaide/theia:latest
+    container_name: theia
+    environment:
+      - USE_LOCAL_GIT:false
+    volumes:
+      - /home/tencent:/home/project
+    ports:
+      - 8080:3000
+    restart: unless-stopped
