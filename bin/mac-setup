@@ -30,6 +30,7 @@ function daily() {
   brew cask install shadowsocksx-ng
   brew cask install the-unarchiver
   brew cask install baidunetdisk
+  brew install --cask keycastr
 }
 
 function chat() {
