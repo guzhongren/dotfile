@@ -134,3 +134,4 @@ autoload -Uz compinit
 compinit -u
 
 alias ls='lsd'
+export GPG_TTY=$(tty)
