@@ -5,64 +5,63 @@ function basic() {
 }
 
 function efficient() {
-  brew cask install cheatsheet
-  brew cask install dash
-  brew cask install alfred
-  brew cask install itsycal
-  brew cask install tencent-lemon
+  brew install --cask cheatsheet
+  brew install --cask dash
+  brew install --cask alfred
+  brew install --cask itsycal
+  brew install --cask tencent-lemon
 }
 
 function daily() {
-  brew cask install google-chrome
-  brew cask install zoomus
-  brew cask install iterm2
-  brew cask install docker
-  brew cask install postman
-  brew cask install notion
-  brew cask install visual-studio-code
-  brew cask install intellij-idea
-  brew cask install microsoft-outlook
-  brew cask install microsoft-powerpoint
-  brew cask install microsoft-word
-  brew cask install microsoft-auto-update
-  brew cask install xmind
-  brew cask install bitwarden
-  brew cask install shadowsocksx-ng
-  brew cask install the-unarchiver
-  brew cask install baidunetdisk
+  brew install --cask google-chrome
+  brew install --cask zoomus
+  brew install --cask iterm2
+  brew install --cask docker
+  brew install --cask postman
+  brew install --cask notion
+  brew install --cask visual-studio-code
+  brew install --cask intellij-idea
+  brew install --cask microsoft-outlook
+  brew install --cask microsoft-powerpoint
+  brew install --cask microsoft-word
+  brew install --cask microsoft-auto-update
+  brew install --cask xmind
+  brew install --cask bitwarden
+  brew install --cask shadowsocksx-ng
+  brew install --cask the-unarchiver
+  brew install --cask baidunetdisk
   brew install --cask keycastr
-  brew install --cask alacritty
 }
 
 function chat() {
-  brew cask install slack
-  brew cask install wechat
-  brew cask install wechatwork
-  brew cask install qq
-  brew cask install dingtalk
+  brew install --cask slack
+  brew install --cask wechat
+  brew install --cask wechatwork
+  brew install --cask qq
+  brew install --cask dingtalk
 }
 
 function entertainment() {
-  brew cask install iina
-  brew cask install neteasemusic
+  brew install --cask iina
+  brew install --cask neteasemusic
 }
 
 function design() {
-  brew cask install figma
-  brew cask install zeplin
+  brew install --cask figma
+  brew install --cask zeplin
 }
 
 
 function devTools() {
   brew install wget telnet curl zsh go python@3 node kubernetes-cli jsonpp watch tree
   brew install ack ctags
-  brew cask install pgadmin4
+  brew install --cask pgadmin4
   brew install shellcheck
 }
 
 function font() {
   brew tap homebrew/cask-fonts
-  brew cask install font-open-sans
+  brew install --cask font-open-sans
 }
 
 function theme() {
