@@ -65,6 +65,7 @@ function font() {
 }
 
 function theme() {
+  ## terminal tools
   brew install lsd
 }
 
