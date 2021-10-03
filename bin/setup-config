@@ -1,0 +1,14 @@
+#!/bin/bash
+dir=$(pwd)
+cd ~
+
+# zshrc
+ln -s ${dir}/config/zsh/.zshrc .zshrc
+
+# powerlevel10k
+ln -s ${dir}/config/powerlevel10k/.p10k.zsh .p10k.zsh
+# gnupg
+mkdir -p ~/.gnupg
+cd ${dir}/config/.gnupg
+ln -s ${dir}/config/.gnupg/gpg-agent.conf gpg-agent.conf
+cd ~

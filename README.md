@@ -8,8 +8,16 @@ A list of script to setup your PC.
 
 ## Usage
 
+### Install software
+
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/guzhongren/awesome-setup/main/bin/mac-setup)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/guzhongren/awesome-setup/main/bin/setup-mac)"
+```
+
+### Install config
+
+```shell
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/guzhongren/awesome-setup/main/bin/setup-config)"
 ```
 
 
