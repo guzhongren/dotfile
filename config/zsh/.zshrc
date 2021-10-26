@@ -74,6 +74,7 @@ plugins=(
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
+  zsh-completions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -115,11 +116,7 @@ export GOPROXY=https://goproxy.io
 
 source <(kubectl completion zsh)
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-export ANDROID_HOME=/Users/c4/Library/Android/sdk
-export PATH=$ANDROID_HOME/platform-tools:$PATH
-export PATH=$ANDROID_HOME/tools:$PATH
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
