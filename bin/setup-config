@@ -12,3 +12,8 @@ mkdir -p ~/.gnupg
 cd "${dir}"/config/.gnupg || exit
 ln -s "${dir}"/config/.gnupg/gpg-agent.conf gpg-agent.conf
 cd ~ || exit
+
+# GPG
+git config --global user.email "guzhongren@live.cn"
+git config --global user.name "guzhongren"
+
