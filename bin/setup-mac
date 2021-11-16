@@ -25,7 +25,6 @@ function daily() {
   brew install --cask notion
   brew install --cask visual-studio-code
   brew install --cask intellij-idea
-  brew install --cask microsoft-outlook
   brew install --cask microsoft-powerpoint
   brew install --cask microsoft-word
   brew install --cask microsoft-auto-update

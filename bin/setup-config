@@ -16,4 +16,5 @@ cd ~ || exit
 # GPG
 git config --global user.email "guzhongren@live.cn"
 git config --global user.name "guzhongren"
+git config --global user.signingkey D18AEC180356622D
 
