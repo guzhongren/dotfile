@@ -13,7 +13,7 @@ cd "${dir}"/config/.gnupg || exit
 ln -s "${dir}"/config/.gnupg/gpg-agent.conf gpg-agent.conf
 cd ~ || exit
 
-# GPG
+# gpg
 git config --global user.email "guzhongren@live.cn"
 git config --global user.name "guzhongren"
 git config --global user.signingkey D18AEC180356622D
