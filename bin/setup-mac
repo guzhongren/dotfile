@@ -56,10 +56,13 @@ function design() {
 
 
 function devTools() {
-  brew install wget telnet curl zsh go python@3 node kubernetes-cli jsonpp watch tree
+  brew install wget telnet curl zsh go python@3 kubernetes-cli jsonpp watch tree
   brew install ack ctags
   brew install --cask pgadmin4
   brew install shellcheck
+  brew install nvm node yarn
+  brew install rust
+  brew install gh
 }
 
 function font() {
@@ -73,7 +76,6 @@ function theme() {
 }
 
 function security() {
-  ## terminal tools
   brew install gnupg
 }
 

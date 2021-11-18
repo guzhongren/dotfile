@@ -16,5 +16,8 @@ cd ~ || exit
 # gpg
 git config --global user.email "guzhongren@live.cn"
 git config --global user.name "guzhongren"
+# gpg --import private.key
+# gpg --import public.key
+gpg --list-secret-keys --keyid-format=long
 git config --global user.signingkey D18AEC180356622D
 
