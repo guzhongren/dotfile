@@ -20,4 +20,5 @@ git config --global user.name "guzhongren"
 # gpg --import public.key
 gpg --list-secret-keys --keyid-format=long
 git config --global user.signingkey D18AEC180356622D
+git config --global commit.gpgSign true
 
