@@ -1,21 +1,28 @@
 #!/bin/bash
+
+source ./utils.sh
+
 dir=$(pwd)
 cd ~ || exit
 
 # zshrc
-ln -s "${dir}"/config/zsh/.zshrc .zshrc
+ln -sf "${dir}"/config/zsh/.zshrc .zshrc
 
 # powerlevel10k
-ln -s "${dir}"/config/powerlevel10k/.p10k.zsh .p10k.zsh
-# gnupg
-mkdir -p ~/.gnupg
-cd "${dir}"/config/.gnupg || exit
-ln -s "${dir}"/config/.gnupg/gpg-agent.conf gpg-agent.conf
-cd ~ || exit
+ln -sf "${dir}"/config/powerlevel10k/.p10k.zsh .p10k.zsh
+
+# # gnupg
+check_folder_exist_or_create "$HOME/.gnupg"
+ln -sf "${dir}"/config/.gnupg/gpg-agent.conf .gnupg/gpg-agent.conf
+
+# .pip
+check_folder_exist_or_create "$HOME/.pip"
+ln -sf "${dir}"/config/.pip .pip
 
 # gpg
 git config --global user.email "guzhongren@live.cn"
 git config --global user.name "guzhongren"
+todo "Need to import those GPG keys: private.key, public.key!"
 # gpg --import private.key
 # gpg --import public.key
 gpg --list-secret-keys --keyid-format=long
