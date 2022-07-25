@@ -17,7 +17,6 @@ function efficient() {
   brew install --cask alfred
   brew install --cask itsycal
   brew install --cask tencent-lemon
-  brew install fig
 }
 
 function daily() {
