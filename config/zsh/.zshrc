@@ -141,7 +141,10 @@ alias daily="cd '/Users/zhongren.gu/Library/Mobile Documents/iCloud~com~logseq~l
 
 
 # Java
-export JAVA_HOME="/usr/local/opt/java11/libexec/openjdk.jdk/Contents/Home"
+export JAVA_HOME="/usr/local/opt/java/libexec/openjdk.jdk/Contents/Home"
 # export PATH=$JAVA_HOME:$PATH
-PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+PATH="/usr/local/opt/openjdk@19/bin:$PATH"
 export CLASS_PATH=$JAVA_HOME/lib
+
+# direnv
+eval "$(direnv hook zsh)"
