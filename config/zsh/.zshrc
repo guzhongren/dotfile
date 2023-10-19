@@ -107,6 +107,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias docker="podman"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -133,18 +134,31 @@ compinit -u
 alias ls='lsd'
 export GPG_TTY=$(tty)
 
-export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
-export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
-export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homberew/brew.git"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"
+export HOMEBREW_NO_INSTALL_CLEANUP=false
+export HOMEBREW_NO_AUTO_UPDATE="1"
+
 export ZSH_DISABLE_COMPFIX=true
+
 alias daily="cd '/Users/zhongren.gu/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
 
 
 # Java
 export JAVA_HOME="/usr/local/opt/java/libexec/openjdk.jdk/Contents/Home"
 # export PATH=$JAVA_HOME:$PATH
-PATH="/usr/local/opt/openjdk@19/bin:$PATH"
+PATH="/usr/local/opt/openjdk@17/bin:$PATH"
 export CLASS_PATH=$JAVA_HOME/lib
 
 # direnv
 eval "$(direnv hook zsh)"
+# Podman
+# export DOCKER_HOST='unix:///Users/zhongren.gu/.local/share/containers/podman/machine/qemu/podman.sock'
+# export DOCKER_HOST="unix://${HOME}/.colima/docker.sock"
+export PODMAN_LOG_LEVEL=info
+
+# pnpm
+# export PNPM_HOME="/Users/zhongren.gu/Library/pnpm"
+# export PATH="$PNPM_HOME:$PATH"
+# pnpm end
