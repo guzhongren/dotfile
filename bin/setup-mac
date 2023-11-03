@@ -12,26 +12,21 @@ function setup_zsh() {
 }
 
 function efficient() {
-  brew install --cask cheatsheet
-  brew install --cask dash
-  brew install --cask alfred
   brew install --cask itsycal
   brew install --cask tencent-lemon
+  brew install --cask dbeaver-community
+  brew install --cask flameshot
+  brew install asdf
 }
 
 function daily() {
   brew install --cask google-chrome
   brew install --cask zoom
-  brew install --cask iterm2
-  brew install --cask postman
-  brew install --cask notion
   brew install --cask visual-studio-code
-  brew install --cask xmind
   brew install --cask bitwarden
   brew install --cask shadowsocksx-ng
   brew install --cask the-unarchiver
-  brew install --cask baidunetdisk
-  brew install --cask keycastr
+  brew install --cask warp
 }
 
 function chat() {
@@ -54,9 +49,8 @@ function design() {
 
 
 function devTools() {
-  brew install wget telnet curl zsh go python@3 kubernetes-cli jsonpp watch tree direnv
+  brew install wget telnet curl zsh go python@3 kubernetes-cli jsonpp watch tree direnv yq
   brew install ack ctags
-  brew install --cask pgadmin4
   brew install shellcheck
   brew install nvm node pnpm
   brew install rust
@@ -74,7 +68,7 @@ function theme() {
 }
 
 function security() {
-  brew install gnupg
+  # brew install gnupg
 }
 
 function basic() {

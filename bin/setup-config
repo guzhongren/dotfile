@@ -9,15 +9,15 @@ cd ~ || exit
 ln -sf "${dir}"/config/zsh/.zshrc .zshrc
 
 # powerlevel10k
-ln -sf "${dir}"/config/powerlevel10k/.p10k.zsh .p10k.zsh
+# ln -sf "${dir}"/config/powerlevel10k/.p10k.zsh .p10k.zsh
 
 # # gnupg
-check_folder_exist_or_create "$HOME/.gnupg"
-ln -sf "${dir}"/config/.gnupg/gpg-agent.conf .gnupg/gpg-agent.conf
+# check_folder_exist_or_create "$HOME/.gnupg"
+# ln -sf "${dir}"/config/.gnupg/gpg-agent.conf .gnupg/gpg-agent.conf
 
 # .pip
-check_folder_exist_or_create "$HOME/.pip"
-ln -sf "${dir}"/config/.pip .pip
+# check_folder_exist_or_create "$HOME/.pip"
+# ln -sf "${dir}"/config/.pip .pip
 
 # gpg
 git config --global user.email "guzhongren@live.cn"
