@@ -107,7 +107,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias docker="podman"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -119,7 +118,6 @@ source <(kubectl completion zsh)
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -153,12 +151,10 @@ export CLASS_PATH=$JAVA_HOME/lib
 
 # direnv
 eval "$(direnv hook zsh)"
-# Podman
-# export DOCKER_HOST='unix:///Users/zhongren.gu/.local/share/containers/podman/machine/qemu/podman.sock'
-# export DOCKER_HOST="unix://${HOME}/.colima/docker.sock"
+
+alias docker="podman"
 export PODMAN_LOG_LEVEL=info
 
-# pnpm
-# export PNPM_HOME="/Users/zhongren.gu/Library/pnpm"
-# export PATH="$PNPM_HOME:$PATH"
-# pnpm end
+# asdf
+. $(brew --prefix asdf)/libexec/asdf.sh
+
