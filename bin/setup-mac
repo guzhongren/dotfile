@@ -68,7 +68,7 @@ function theme() {
 }
 
 function security() {
-  # brew install gnupg
+  brew install gpg
 }
 
 function basic() {
