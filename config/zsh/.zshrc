@@ -132,11 +132,11 @@ compinit -u
 alias ls='lsd'
 export GPG_TTY=$(tty)
 
-export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homberew/brew.git"
-export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
-export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"
+# export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homberew/brew.git"
+# export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
+# export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"
 export HOMEBREW_NO_INSTALL_CLEANUP=false
-export HOMEBREW_NO_AUTO_UPDATE="1"
+export HOMEBREW_NO_AUTO_UPDATE=true
 
 export ZSH_DISABLE_COMPFIX=true
 
@@ -144,17 +144,37 @@ alias daily="cd '/Users/zhongren.gu/Library/Mobile Documents/iCloud~com~logseq~l
 
 
 # Java
-export JAVA_HOME="/usr/local/opt/java/libexec/openjdk.jdk/Contents/Home"
+# export JAVA_HOME="/usr/local/opt/java/libexec/openjdk.jdk/Contents/Home"
 # export PATH=$JAVA_HOME:$PATH
-PATH="/usr/local/opt/openjdk@17/bin:$PATH"
-export CLASS_PATH=$JAVA_HOME/lib
-
+# PATH="/usr/local/opt/openjdk@17/bin:$PATH"
+# export CLASS_PATH=$JAVA_HOME/lib
+. ~/.asdf/plugins/java/set-java-home.zsh
 # direnv
 eval "$(direnv hook zsh)"
 
-alias docker="podman"
+# alias docker="podman"
 export PODMAN_LOG_LEVEL=info
+# export DOCKER_HOST=unix:///Users/zhongren.gu/.local/share/containers/podman/machine/podman.sock
+
 
 # asdf
 . $(brew --prefix asdf)/libexec/asdf.sh
+# alias docker-compose="podman-compose"
 
+# pnpm
+export PNPM_HOME="/Users/zhongren.gu/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# SSH config
+# Start the SSH agent if it's not already running
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    eval "$(ssh-agent -s)"
+fi
+
+# Add the SSH key to the agent
+# ssh-add ~/.ssh/hawcroft_bitbucket_id_ed25519
+# End SSH config
