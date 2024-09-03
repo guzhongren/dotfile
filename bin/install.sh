@@ -64,25 +64,11 @@ install_tool_list() {
     fi
 }
 
-install_cloudflare_cert() {
-    echo "🍗 Start to install cloudflare cert"
-    local cert_path="$HOME/.config/.cloudflare"
-    if [ ! -e "${cert_path}" ]; then
-        sudo mkdir -p "${cert_path}"
-    fi
-    sudo curl -o "${cert_path}/Cloudflare_CA.crt" https://developers.cloudflare.com/cloudflare-one/static/Cloudflare_CA.crt
-    sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain "${cert_path}/Cloudflare_CA.crt"
-
-    sudo curl -o "${cert_path}/Cloudflare_CA.pem" https://developers.cloudflare.com/cloudflare-one/static/Cloudflare_CA.pem
-    (echo | sudo tee -a /etc/ssl/cert.pem) < "${cert_path}/Cloudflare_CA.pem"
-
-    echo "🎉 Successfully installed cloudflare cert"
-}
-
-
 install_homebrew() {
     if ! which "brew" &> /dev/null; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+        eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
 }
 
@@ -94,7 +80,6 @@ install_infra() {
     echo "🍗 Start to install infra..."
     install_homebrew;
     install_zsh;
-    install_cloudflare_cert;
     echo "🎉 Successfully installed infra..."
 }
 
@@ -106,23 +91,23 @@ install_asdf_dependencies() {
 
     if ! which "node" &> /dev/null; then
         asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-        asdf install nodejs 16.13.2
-        asdf global nodejs 16.13.2
+        asdf install nodejs 20.17.0
+        asdf global nodejs 20.17.0
         asdf shim-versions node
     fi
 
 
     if ! which "java" &> /dev/null; then
         asdf plugin-add java https://github.com/halcyon/asdf-java.git
-        asdf install java openjdk-11
-        asdf global java openjdk-11
+        asdf install java openjdk-21
+        asdf global java openjdk-21
     fi
 
-    if ! which "python" &> /dev/null; then
-        asdf plugin-add python
-        asdf install python 2.7.18
-        asdf global python 2.7.18
-    fi
+    # if ! which "python" &> /dev/null; then
+    #     asdf plugin-add python
+    #     asdf install python 2.7.18
+    #     asdf global python 2.7.18
+    # fi
 
 
     echo "🎉 All asdf dependencies are installed"
@@ -132,31 +117,93 @@ install_asdf_dependencies() {
 #######################################zsh#######################################
 config_zsh() {
 cat << 'EOF' > "$HOME/.zshrc"
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+        source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
+
     export ZSH="$HOME/.oh-my-zsh"
 
     ZSH_THEME="robbyrussell"
 
-    plugins=(git)
+    HIST_STAMPS="mm/dd/yyyy"
 
-    source "$ZSH/oh-my-zsh.sh"
+    ZSH_CUSTOM=$ZSH/custom
 
-    export HOMEBREW_NO_AUTO_UPDATE=1
-    export HOMEBREW_NO_INSTALL_CLEANUP=false
-    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
-    export HOMEBREW_BREW_GIT_REMOTE=https://mirrors.aliyun.com/homebrew/brew.git
-    export HOMEBREW_CORE_GIT_REMOTE=https://mirrors.aliyun.com/homebrew/homebrew-core.git
+    plugins=(
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-completions
+    )
 
+    source $ZSH/oh-my-zsh.sh
+
+
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+    export CARGO_INCREMENTAL=0
+    export PATH="$HOME/.deno/bin:$PATH"
+    fpath=(~/.zsh $fpath)
+    autoload -Uz compinit
+    compinit -u
+
+    alias ls='lsd'
     export GPG_TTY=$(tty)
+
+    export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homberew/brew.git"
+    export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
+    export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"
+    export HOMEBREW_NO_INSTALL_CLEANUP=false
+    export HOMEBREW_NO_AUTO_UPDATE=true
+
+    export ZSH_DISABLE_COMPFIX=true
+
+    alias daily="cd '~/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
+
+    alias glol="git log --oneline --decorate --graph --date=local --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(white)%cd%Creset'"
+
+
     . /opt/homebrew/opt/asdf/libexec/asdf.sh
     export PATH=$PATH:$HOME/.asdf/shims
-    PATH=$(pyenv root)/shims:$PATH
+    # PATH=$(pyenv root)/shims:$PATH
 
     #JAVA_HOME
-    . "$HOME/.asdf/plugins/java/set-java-home.zsh"
+    # . "$HOME/.asdf/plugins/java/set-java-home.zsh"
 
+    # direnv
     eval "$(direnv hook zsh)"
+
     # enable to download node-pre-gyp package
     export NODE_TLS_REJECT_UNAUTHORIZED=0
+
+    # alias docker="podman"
+    # export PODMAN_LOG_LEVEL=info
+    # export DOCKER_HOST=unix:///Users/zhongren.gu/.local/share/containers/podman/machine/podman.sock
+
+
+    # asdf
+    . $(brew --prefix asdf)/libexec/asdf.sh
+    # alias docker-compose="podman-compose"
+
+    # pnpm
+    export PNPM_HOME="~/Library/pnpm"
+    case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+    esac
+    # pnpm end
+
+    # SSH config
+    # Start the SSH agent if it's not already running
+    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+        eval "$(ssh-agent -s)"
+    fi
+
+    # Add the SSH key to the agent
+    # ssh-add ~/.ssh/hawcroft_bitbucket_id_ed25519
+    # End SSH config
 EOF
 }
 
@@ -165,12 +212,6 @@ EOF
 #######################################show todo#######################################
 show_todo() {
   echo "I think you have installed some necessary softwares on your laptop now. But there are some things need to be done on your side.
-
-
-  🟢 Apply access to the below platform's account from your lead(OA/TL/PM)
-    🟢 Techpass(https://docs.developer.tech.gov.sg/)
-    🟢 Techpass(https://docs.developer.tech.gov.sg/)
-    🟢 ServiceDesk(https://servicedesk.hpb.gov.sg/)
 
 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
 🎉        Have a good journey in HPB project!           🎉
@@ -181,40 +222,33 @@ show_todo() {
 
 cast_list=(
     "raycast"
-    "insomnia"
     "flameshot"
     "tencent-lemon"
-    "podman-desktop"
     "logseq"
     "itsycal"
     "dbeaver-community"
     "warp"
-    "microsoft-azure-storage-explorer"
     "drawio"
     "visual-studio-code"
-    "intellij-idea"
     "zed"
     "microsoft-teams"
     "microsoft-edge"
     "google-chrome"
-    "react-native-debugger"
     "zoom"
     "the-unarchiver"
-    "macpass"
 )
 
 tool_list=(
     "asdf"
-    "podman"
+    "colima"
     "wget"
     "curl"
     "pyenv"
+    "direnv"
     "vim"
     "direnv"
     "gnupg"
-    "helm"
     "kubernetes-cli"
-    "maven"
     "ruby"
     "tree"
     "watchman"

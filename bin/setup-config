@@ -20,12 +20,12 @@ ln -sf "${dir}"/config/zsh/.zshrc .zshrc
 # ln -sf "${dir}"/config/.pip .pip
 
 # gpg
-git config --global user.email "guzhongren@live.cn"
-git config --global user.name "guzhongren"
-todo "Need to import those GPG keys: private.key, public.key!"
-# gpg --import private.key
-# gpg --import public.key
-gpg --list-secret-keys --keyid-format=long
-git config --global user.signingkey D18AEC180356622D
-git config --global commit.gpgSign true
-git config --global tag.forceSignAnnotated true
+# git config --global user.email "guzhongren@live.cn"
+# git config --global user.name "guzhongren"
+# todo "Need to import those GPG keys: private.key, public.key!"
+# # gpg --import private.key
+# # gpg --import public.key
+# gpg --list-secret-keys --keyid-format=long
+# git config --global user.signingkey D18AEC180356622D
+# git config --global commit.gpgSign true
+# git config --global tag.forceSignAnnotated true

@@ -11,13 +11,13 @@ A list of script to setup your PC.
 ### Install software
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/guzhongren/awesome-setup/main/bin/setup-mac)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/guzhongren/dotfile/main/bin/install.sh)"
 ```
 
 ### Install config
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/guzhongren/awesome-setup/main/bin/setup-config)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/guzhongren/dotfile/main/bin/setup-config)"
 ```
 
 ## Manually work
