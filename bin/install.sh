@@ -257,6 +257,7 @@ tool_list=(
     "watchman"
     "yq"
     "zstd"
+    "lsd"
 )
 
 
