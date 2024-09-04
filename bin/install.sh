@@ -258,6 +258,8 @@ tool_list=(
     "yq"
     "zstd"
     "lsd"
+    "docker"
+    "docker-compose"
 )
 
 
