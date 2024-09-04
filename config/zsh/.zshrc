@@ -68,14 +68,6 @@ export NODE_TLS_REJECT_UNAUTHORIZED=0
 . $(brew --prefix asdf)/libexec/asdf.sh
 # alias docker-compose="podman-compose"
 
-# pnpm
-export PNPM_HOME="~/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
 # SSH config
 # Start the SSH agent if it's not already running
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
