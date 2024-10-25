@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 set -euo pipefail
 
 ########################################base#######################################
@@ -92,25 +92,6 @@ install_infra() {
 install_asdf_dependencies() {
     echo "🍗 Start to install asdf dependencies..."
 
-    if ! which "node" &> /dev/null; then
-        asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-        asdf install nodejs 20.17.0
-        asdf global nodejs 20.17.0
-        asdf shim-versions node
-    fi
-
-
-    if ! which "java" &> /dev/null; then
-        asdf plugin-add java https://github.com/halcyon/asdf-java.git
-        asdf install java openjdk-21
-        asdf global java openjdk-21
-    fi
-
-    # if ! which "python" &> /dev/null; then
-    #     asdf plugin-add python
-    #     asdf install python 2.7.18
-    #     asdf global python 2.7.18
-    # fi
 
 
     echo "🎉 All asdf dependencies are installed"
@@ -168,12 +149,6 @@ cat << 'EOF' > "$HOME/.zshrc"
     alias glol="git log --oneline --decorate --graph --date=local --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(white)%cd%Creset'"
 
 
-    . /opt/homebrew/opt/asdf/libexec/asdf.sh
-    export PATH=$PATH:$HOME/.asdf/shims
-    # PATH=$(pyenv root)/shims:$PATH
-
-    #JAVA_HOME
-    # . "$HOME/.asdf/plugins/java/set-java-home.zsh"
 
     # direnv
     eval "$(direnv hook zsh)"
@@ -186,8 +161,6 @@ cat << 'EOF' > "$HOME/.zshrc"
     # export DOCKER_HOST=unix:///Users/zhongren.gu/.local/share/containers/podman/machine/podman.sock
 
 
-    # asdf
-    . $(brew --prefix asdf)/libexec/asdf.sh
     # alias docker-compose="podman-compose"
 
     # pnpm
@@ -242,7 +215,7 @@ cast_list=(
 )
 
 tool_list=(
-    "asdf"
+    "wise"
     "colima"
     "wget"
     "curl"

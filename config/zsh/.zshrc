@@ -46,26 +46,17 @@ alias daily="cd '~/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
 alias glol="git log --oneline --decorate --graph --date=local --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(white)%cd%Creset'"
 
 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-export PATH=$PATH:$HOME/.asdf/shims
-# PATH=$(pyenv root)/shims:$PATH
-
-#JAVA_HOME
-# . "$HOME/.asdf/plugins/java/set-java-home.zsh"
-
 # direnv
 eval "$(direnv hook zsh)"
 
 # enable to download node-pre-gyp package
-export NODE_TLS_REJECT_UNAUTHORIZED=0
+export NODE_TLS_REJECT_UNAUTHORIZED=1
 
 # alias docker="podman"
 # export PODMAN_LOG_LEVEL=info
 # export DOCKER_HOST=unix:///Users/zhongren.gu/.local/share/containers/podman/machine/podman.sock
 
 
-# asdf
-. $(brew --prefix asdf)/libexec/asdf.sh
 # alias docker-compose="podman-compose"
 
 # SSH config
@@ -77,3 +68,13 @@ fi
 # Add the SSH key to the agent
 # ssh-add ~/.ssh/hawcroft_bitbucket_id_ed25519
 # End SSH config
+
+# pnpm
+export PNPM_HOME="/Users/zhongren.gu/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+eval "$(/Users/zhongren.gu/.local/bin/mise activate zsh)"
