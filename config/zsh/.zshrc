@@ -33,16 +33,15 @@ compinit -u
 alias ls='lsd'
 export GPG_TTY=$(tty)
 
-export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homberew/brew.git"
-export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
-export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"
-export HOMEBREW_NO_INSTALL_CLEANUP=false
+# export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homberew/brew.git"
+#export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
+#export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"
+export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_NO_AUTO_UPDATE=true
 
 export ZSH_DISABLE_COMPFIX=true
 
-alias daily="cd '~/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
-
+alias daily="cd '~/Library/Mobile\ Documents/iCloud\~com\~logseq\~logseq/Documents'"
 alias glol="git log --oneline --decorate --graph --date=local --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(white)%cd%Creset'"
 
 
