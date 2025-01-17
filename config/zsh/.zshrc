@@ -54,9 +54,10 @@ export NODE_TLS_REJECT_UNAUTHORIZED=1
 # alias docker="podman"
 # export PODMAN_LOG_LEVEL=info
 # export DOCKER_HOST=unix:///Users/zhongren.gu/.local/share/containers/podman/machine/podman.sock
-
-
 # alias docker-compose="podman-compose"
+
+export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
+export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
 
 # SSH config
 # Start the SSH agent if it's not already running
