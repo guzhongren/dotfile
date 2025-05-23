@@ -212,6 +212,7 @@ cast_list=(
     "google-chrome"
     "zoom"
     "the-unarchiver"
+    "languagetool"
 )
 
 tool_list=(

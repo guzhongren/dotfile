@@ -78,3 +78,7 @@ esac
 # pnpm end
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 eval "$(/Users/zhongren.gu/.local/bin/mise activate zsh)"
+
+alias k="kubectl"
+
+export GITHUB_PERSONAL_ACCESS_TOKEN="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"
