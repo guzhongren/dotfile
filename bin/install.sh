@@ -85,6 +85,12 @@ install_infra() {
     install_zsh;
     echo "🎉 Successfully installed infra..."
 }
+ install_rime_ice() {
+    app_name="Rime_ICE"
+    echo "🍗 Start to install ${app_name}..."
+    git clone https://github.com/iDvel/rime-ice.git ~/Library/RimeRime --depth 1
+    echo "🎉 Successfully installed ${app_name}..."
+ }
 
 ########################################base#######################################
 ########################################asdf#######################################
@@ -247,5 +253,7 @@ install_tool_list "${tool_list[@]}";
 install_asdf_dependencies;
 
 config_zsh;
+
+install_rime_ice;
 
 show_todo;
