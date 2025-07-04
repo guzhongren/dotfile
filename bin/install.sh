@@ -213,6 +213,7 @@ cast_list=(
     "zoom"
     "the-unarchiver"
     "languagetool"
+    "squirrel-app"
 )
 
 tool_list=(
