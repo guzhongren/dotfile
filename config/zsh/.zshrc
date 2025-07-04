@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -8,7 +10,7 @@ ZSH_THEME="robbyrussell"
 
 HIST_STAMPS="mm/dd/yyyy"
 
-ZSH_CUSTOM=$ZSH/custom
+ZSH_CUSTOM="$ZSH/custom"
 
 plugins=(
   git
@@ -17,7 +19,7 @@ plugins=(
   zsh-completions
 )
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 
 export NVM_DIR="$HOME/.nvm"
@@ -26,12 +28,13 @@ export NVM_DIR="$HOME/.nvm"
 
 export CARGO_INCREMENTAL=0
 export PATH="$HOME/.deno/bin:$PATH"
-fpath=(~/.zsh $fpath)
+fpath=(~/.zsh "$fpath")
 autoload -Uz compinit
 compinit -u
 
 alias ls='lsd'
-export GPG_TTY=$(tty)
+export GPG_TTY
+GPG_TTY=$(tty)
 
 # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homberew/brew.git"
 #export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
@@ -80,5 +83,3 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 eval "$(/Users/zhongren.gu/.local/bin/mise activate zsh)"
 
 alias k="kubectl"
-
-export GITHUB_PERSONAL_ACCESS_TOKEN="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"

@@ -13,7 +13,7 @@ function command_exists() {
 function install() {
   command_exists "${1}"
   checked_result=$?
-  echo ${checked_result}
+  echo "${checked_result}"
   if [ ${checked_result} != '0' ]; then
     echo 'Start to install' "${1}."
     brew install "${1}"
@@ -24,7 +24,7 @@ function install() {
 
 function install_cask() {
   command_exists "${1}"
-  if [ $? -ne 0 ]; then
+  if ! command_exists "${1}"; then
     echo "Start to install ${1}."
     brew install --cask "$1"
     echo "🚀 Successfully installed ${1}!"

@@ -1,10 +1,9 @@
-#! /bin/sh
+#!/bin/bash
 
-source ./utils.sh
+. ./utils.sh
 
-list=(ll find)
+list=("ll" "find")
 
 for tool in "${list[@]}"; do
   install "${tool}"
 done
-
