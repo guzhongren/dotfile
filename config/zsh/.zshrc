@@ -1,9 +1,4 @@
 #!/bin/zsh
-
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
@@ -21,16 +16,9 @@ plugins=(
 
 source "$ZSH/oh-my-zsh.sh"
 
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export CARGO_INCREMENTAL=0
-export PATH="$HOME/.deno/bin:$PATH"
-fpath=(~/.zsh "$fpath")
-autoload -Uz compinit
-compinit -u
+# fpath=(~/.zsh "$fpath")
+# autoload -Uz compinit
+# compinit -u
 
 alias ls='lsd'
 export GPG_TTY
@@ -46,7 +34,6 @@ export ZSH_DISABLE_COMPFIX=true
 
 alias daily="cd '~/Library/Mobile\ Documents/iCloud\~com\~logseq\~logseq/Documents'"
 alias glol="git log --oneline --decorate --graph --date=local --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(white)%cd%Creset'"
-
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -64,22 +51,18 @@ export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
 
 # SSH config
 # Start the SSH agent if it's not already running
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    eval "$(ssh-agent -s)"
+if ! pgrep -u "$USER" ssh-agent >/dev/null; then
+  eval "$(ssh-agent -s)"
 fi
 
-# Add the SSH key to the agent
-# ssh-add ~/.ssh/hawcroft_bitbucket_id_ed25519
-# End SSH config
-
 # pnpm
-export PNPM_HOME="/Users/zhongren.gu/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-eval "$(/Users/zhongren.gu/.local/bin/mise activate zsh)"
+eval "$($HOME/.local/bin/mise activate zsh)"
 
 alias k="kubectl"
