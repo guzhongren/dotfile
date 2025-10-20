@@ -203,7 +203,7 @@ show_todo() {
 #######################################show todo#######################################
 
 cast_list=(
-    "raycast"
+    # "raycast"
     "flameshot"
     "tencent-lemon"
     "logseq"
