@@ -11,14 +11,20 @@ A list of script to setup your PC.
 ### Install software
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/guzhongren/dotfile/main/bin/install.sh)"
+sh -c "$(curl -fsSL 'https://raw.githubusercontent.com/guzhongren/dotfile/refs/heads/main/bin/install.sh?token=xxxx')"
 ```
+
+#### Note
+Click the `Raw` button for the `./bin/install.sh`
 
 ### Install config
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/guzhongren/dotfile/main/bin/setup-config)"
+sh -c "$(curl -fsSL 'https://raw.githubusercontent.com/guzhongren/dotfile/refs/heads/main/bin/setup-config?token=xxxx')"
 ```
+
+#### Note
+Click the `Raw` button for the `./bin/setup-config`
 
 ## Manually work
 

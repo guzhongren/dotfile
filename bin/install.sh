@@ -283,6 +283,8 @@ cast_list=(
     "zoom"
     "the-unarchiver"
     "languagetool"
+    "wechat"
+    "wechatwork"
 )
 
 tool_list=(
