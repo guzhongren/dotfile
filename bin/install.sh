@@ -22,7 +22,7 @@ check_installed_tool() {
     local installed_tool_list=()
 
     for tool_name in "$@"; do
-        if ! which "${tool_name}" &> /dev/null; then
+        if ! command_exists "${tool_name}"; then
             installed_tool_list+=("$tool_name")
         fi
     done
@@ -31,6 +31,13 @@ check_installed_tool() {
         # echo "Not installed app list: ${installed_tool_list[*]}"
         echo "${installed_tool_list[@]}"
     fi
+}
+
+command_exists() {
+    if [ $# -lt 1 ]; then
+        return 1
+    fi
+    command -v "$1" >/dev/null 2>&1
 }
 
 install_cask_list() {
@@ -65,18 +72,76 @@ install_tool_list() {
 }
 
 install_homebrew() {
-    if ! which "brew" &> /dev/null; then
+    if command -v brew >/dev/null 2>&1; then
+        echo "Homebrew already installed at: $(command -v brew)"
+        BREW_BIN="$(command -v brew)"
+    else
+        echo "Homebrew not found. Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        (echo; echo "eval \"$(/opt/homebrew/bin/brew shellenv)\"" ) >> ~/.zprofile
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+        if [ -x "/opt/homebrew/bin/brew" ]; then
+            BREW_BIN="/opt/homebrew/bin/brew"
+        elif [ -x "/usr/local/bin/brew" ]; then
+            BREW_BIN="/usr/local/bin/brew"
+        else
+            BREW_BIN="$(command -v brew || true)"
+        fi
+    fi
+
+    if [ -n "${BREW_BIN:-}" ]; then
+        if ! grep -Fq "brew shellenv" "$HOME/.zprofile" 2>/dev/null; then
+            echo "Adding Homebrew shellenv to ~/.zprofile"
+            (echo; echo "eval \"$(${BREW_BIN} shellenv)\"") >> "$HOME/.zprofile"
+        fi
+
+        eval "$("${BREW_BIN}" shellenv)"
+    else
+        echo "Warning: brew binary not found after attempted install. You may need to add Homebrew to PATH manually."
     fi
 }
 
 install_zsh() {
-    sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-completions "${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}"/plugins/zsh-completions
+    if ! command -v zsh >/dev/null 2>&1; then
+        echo "zsh not found. Installing zsh via Homebrew..."
+        if ! command -v brew >/dev/null 2>&1; then
+            echo "brew not found. Installing Homebrew first..."
+            install_homebrew
+        fi
+        brew install zsh || true
+    else
+        echo "zsh is already installed at: $(command -v zsh)"
+    fi
+
+    # Default OH_MY_ZSH directory
+    ZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
+
+    if [ -d "$ZSH_DIR" ]; then
+        echo "Oh My Zsh already installed at $ZSH_DIR, skipping installer"
+    else
+        echo "Installing Oh My Zsh (non-interactive, will not change shell)..."
+        # Disable changing shell and running zsh after install
+        RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+
+    ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-${ZSH_DIR}/custom}"
+
+    # Clone plugins only if they don't already exist
+    if [ ! -d "${ZSH_CUSTOM_DIR}/plugins/zsh-autosuggestions" ]; then
+        git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM_DIR}/plugins/zsh-autosuggestions"
+    else
+        echo "zsh-autosuggestions already present"
+    fi
+
+    if [ ! -d "${ZSH_CUSTOM_DIR}/plugins/zsh-syntax-highlighting" ]; then
+        git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM_DIR}/plugins/zsh-syntax-highlighting"
+    else
+        echo "zsh-syntax-highlighting already present"
+    fi
+
+    if [ ! -d "${ZSH_CUSTOM_DIR}/plugins/zsh-completions" ]; then
+        git clone --depth 1 https://github.com/zsh-users/zsh-completions "${ZSH_CUSTOM_DIR}/plugins/zsh-completions"
+    else
+        echo "zsh-completions already present"
+    fi
 }
 
 install_infra() {
@@ -204,7 +269,7 @@ show_todo() {
 
 cast_list=(
     # "raycast"
-    "flameshot"
+    # "flameshot"
     "tencent-lemon"
     "logseq"
     "itsycal"
@@ -213,16 +278,15 @@ cast_list=(
     "drawio"
     "visual-studio-code"
     "zed"
-    "microsoft-edge"
+    # "microsoft-edge"
     "google-chrome"
     "zoom"
     "the-unarchiver"
     "languagetool"
-    "squirrel-app"
 )
 
 tool_list=(
-    "wise"
+    "mise"
     "colima"
     "wget"
     "curl"
