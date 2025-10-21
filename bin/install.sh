@@ -285,6 +285,7 @@ cast_list=(
     "languagetool"
     "wechat"
     "wechatwork"
+    "iina"
 )
 
 tool_list=(

@@ -27,7 +27,7 @@ GPG_TTY=$(tty)
 # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homberew/brew.git"
 #export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
 #export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"
-export HOMEBREW_NO_INSTALL_CLEANUP=1
+export HOMEBREW_NO_INSTALL_CLEANUP=
 export HOMEBREW_NO_AUTO_UPDATE=true
 
 export ZSH_DISABLE_COMPFIX=true
@@ -63,6 +63,5 @@ case ":$PATH:" in
 esac
 # pnpm end
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-eval "$($HOME/.local/bin/mise activate zsh)"
-
+eval "$(mise activate zsh)"
 alias k="kubectl"
