@@ -286,6 +286,7 @@ cast_list=(
     "wechat"
     "wechatwork"
     "iina"
+    "folo"
 )
 
 tool_list=(
