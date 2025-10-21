@@ -27,3 +27,7 @@ gpg --list-secret-keys --keyid-format=long
 git config --global user.signingkey D18AEC180356622D
 git config --global commit.gpgSign true
 git config --global tag.forceSignAnnotated true
+
+
+# mise
+mise completion zsh
