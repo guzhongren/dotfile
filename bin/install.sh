@@ -217,6 +217,7 @@ cast_list=(
     "wechatwork"
     "iina"
     "folo"
+    "neteasemusic"
 )
 
 tool_list=(
