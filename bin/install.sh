@@ -33,13 +33,6 @@ check_installed_tool() {
     fi
 }
 
-command_exists() {
-    if [ $# -lt 1 ]; then
-        return 1
-    fi
-    command -v "$1" >/dev/null 2>&1
-}
-
 install_cask_list() {
     local app_list=("$@")
 

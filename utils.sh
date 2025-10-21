@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 
 function command_exists() {
-  if type "${1}"; then
+  if [ $# -lt 1 ]; then
+    return 1
+  fi
+
+  if command -v "$1" >/dev/null 2>&1; then
+    if [ "${VERBOSE:-false}" = "true" ]; then
       echo "🚀 ${1} has installed!"
-      return 0;
+    fi
+    return 0
   else
+    if [ "${VERBOSE:-false}" = "true" ]; then
       echo "⚠️ Command: ${1} has not installed!"
-      return 1;
+    fi
+    return 1
   fi
 }
 
