@@ -22,6 +22,6 @@ jobs:
         with:
           path: "bin"
       - name: execute install.sh
-        run: bash -n bin/install.sh
+        run: ./bin/install.sh
       - name: execute config
-        run: bash -n bin/setup_config
+        run: ./bin/setup_config
