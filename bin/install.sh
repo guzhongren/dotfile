@@ -56,6 +56,39 @@ install_cask_list() {
     fi
 }
 
+install_languagetools() {
+    local requested_tools=("${@}")
+    local to_install=()
+
+    if ! command_exists "mise"; then
+        echo "mise not found, installing mise first..."
+        if command -v brew >/dev/null 2>&1; then
+            brew install mise
+        else
+            echo "Homebrew not found. Installing Homebrew first..."
+            install_homebrew
+            brew install mise
+        fi
+    fi
+
+    for t in "${requested_tools[@]}"; do
+        if command_exists "${t}"; then
+            echo "✅ ${t} is already installed; skipping"
+        else
+            to_install+=("${t}")
+        fi
+    done
+
+    if [ ${#to_install[@]} -eq 0 ]; then
+        echo "🎉 All requested language tools are already installed"
+        return 0
+    fi
+
+    echo "Installing language tools via mise: ${to_install[*]}"
+    mise install "${to_install[@]}"
+    echo "🎉 Successfully installed: ${to_install[*]}"
+}
+
 install_tool_list() {
     local tool_list="$*"
     not_installed_tool_list=$(check_installed_tool "${tool_list[@]}")
@@ -305,6 +338,12 @@ tool_list=(
     "docker"
     "docker-compose"
 )
+languagetool_list=(
+    "node"
+    "hugo"
+    "pre-commit"
+    "python"
+ )
 
 
 install_infra;
@@ -318,5 +357,7 @@ install_asdf_dependencies;
 config_zsh;
 
 install_rime_ice;
+
+install_languagetools "${languagetool_list[@]}";
 
 show_todo;
