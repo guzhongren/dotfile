@@ -16,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v3
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
       - uses: pre-commit/action@v3.0.1
       - name: Run Shellcheck
         uses: azohra/shell-linter@latest
