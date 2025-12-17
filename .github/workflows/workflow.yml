@@ -24,4 +24,4 @@ jobs:
       - name: execute install.sh
         run: ./bin/install.sh
       - name: execute config
-        run: ./bin/setup_config
+        run: ./bin/setup-config
