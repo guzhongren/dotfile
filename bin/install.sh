@@ -185,7 +185,7 @@ show_todo() {
   echo "I think you have installed some necessary softwares on your laptop now. But there are some things need to be done on your side.
 
 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
-🎉        Have a good journey in HPB project!           🎉
+🎉        Have a good journey!                 🎉
 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
   "
 }
