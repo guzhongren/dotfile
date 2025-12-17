@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+source ./utils.sh
 ########################################base#######################################
 
 check_installed_apps() {
