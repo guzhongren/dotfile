@@ -198,7 +198,7 @@ cast_list=(
     "logseq"
     "itsycal"
     "dbeaver-community"
-    "warp"
+    # "warp"
     "drawio"
     "visual-studio-code"
     "zed"
@@ -206,12 +206,12 @@ cast_list=(
     "google-chrome"
     "zoom"
     "the-unarchiver"
-    "languagetool"
     "wechat"
     "wechatwork"
     "iina"
     "folo"
     "neteasemusic"
+    "ghostty"
 )
 
 tool_list=(
@@ -230,6 +230,8 @@ tool_list=(
     "lsd"
     "docker"
     "docker-compose"
+    "starship"
+    "yazi"
 )
 languagetool_list=(
     "node"

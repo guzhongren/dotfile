@@ -31,3 +31,10 @@ git config --global tag.forceSignAnnotated true
 
 # mise
 mise completion zsh
+
+# Ghosty
+mkdir -p ~/.config/ghostty
+ln -sf "${dir}"/config/ghostty/config ~/.config/ghostty/config
+
+# Starship
+starship preset catppuccin-powerline -o ~/.config/starship.toml

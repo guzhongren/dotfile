@@ -22,8 +22,7 @@ source "$ZSH/oh-my-zsh.sh"
 # compinit -u
 
 alias ls='lsd'
-export GPG_TTY
-GPG_TTY=$(tty)
+export GPG_TTY=$(tty)
 
 # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homberew/brew.git"
 #export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
@@ -66,3 +65,5 @@ esac
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 eval "$(mise activate zsh)"
 alias k="kubectl"
+
+eval "$(starship init zsh)"
