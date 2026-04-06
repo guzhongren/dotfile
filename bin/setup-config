@@ -27,6 +27,8 @@ gpg --list-secret-keys --keyid-format=long
 git config --global user.signingkey D18AEC180356622D
 git config --global commit.gpgSign true
 git config --global tag.forceSignAnnotated true
+echo "pinentry-program $(which pinentry-tty)" >> ~/.gnupg/gpg-agent.conf
+gpgconf --reload gpg-agent
 
 
 # mise
