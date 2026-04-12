@@ -1,0 +1,23 @@
+
+cast_list=(
+    # "raycast"
+    # "flameshot"
+    "tencent-lemon"
+    "logseq"
+    "itsycal"
+    "dbeaver-community"
+    # "warp"
+    "drawio"
+    "visual-studio-code"
+    "zed"
+    # "microsoft-edge"
+    "google-chrome"
+    "zoom"
+    "the-unarchiver"
+    "wechat"
+    "wechatwork"
+    "iina"
+    "folo"
+    "neteasemusic"
+    "ghostty"
+)

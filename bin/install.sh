@@ -2,6 +2,10 @@
 set -euo pipefail
 
 source ./utils.sh
+source ./bin/config_cask_list.sh
+source ./bin/config_cmd_tool_list.sh
+source ./bin/config_languagetool_list.sh
+
 ########################################base#######################################
 
 check_installed_apps() {
@@ -191,56 +195,56 @@ show_todo() {
 }
 #######################################show todo#######################################
 
-cast_list=(
-    # "raycast"
-    # "flameshot"
-    "tencent-lemon"
-    "logseq"
-    "itsycal"
-    "dbeaver-community"
-    # "warp"
-    "drawio"
-    "visual-studio-code"
-    "zed"
-    # "microsoft-edge"
-    "google-chrome"
-    "zoom"
-    "the-unarchiver"
-    "wechat"
-    "wechatwork"
-    "iina"
-    "folo"
-    "neteasemusic"
-    "ghostty"
-)
-
-tool_list=(
-    "mise"
-    "uv"
-    "colima"
-    "wget"
-    "curl"
-    "vim"
-    "direnv"
-    "gnupg"
-    "kubernetes-cli"
-    "tree"
-    "watchman"
-    "yq"
-    "lsd"
-    "docker"
-    "docker-compose"
-    "starship"
-    "yazi"
-)
-languagetool_list=(
-    "node"
-    "hugo"
-    "pre-commit"
-    "python"
-    "pnpm"
- )
-
+# cast_list=(
+#     # "raycast"
+#     # "flameshot"
+#     "tencent-lemon"
+#     "logseq"
+#     "itsycal"
+#     "dbeaver-community"
+#     # "warp"
+#     "drawio"
+#     "visual-studio-code"
+#     "zed"
+#     # "microsoft-edge"
+#     "google-chrome"
+#     "zoom"
+#     "the-unarchiver"
+#     "wechat"
+#     "wechatwork"
+#     "iina"
+#     "folo"
+#     "neteasemusic"
+#     "ghostty"
+# )
+#
+# tool_list=(
+#     "mise"
+#     "uv"
+#     "colima"
+#     "wget"
+#     "curl"
+#     "vim"
+#     "direnv"
+#     "gnupg"
+#     "kubernetes-cli"
+#     "tree"
+#     "watchman"
+#     "yq"
+#     "lsd"
+#     "docker"
+#     "docker-compose"
+#     "starship"
+#     "yazi"
+# )
+# languagetool_list=(
+#     "node"
+#     "hugo"
+#     "pre-commit"
+#     "python"
+#     "pnpm"
+#  )
+#
 
 install_infra;
 

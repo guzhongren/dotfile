@@ -1,0 +1,20 @@
+
+tool_list=(
+    "mise"
+    "uv"
+    "colima"
+    "wget"
+    "curl"
+    "vim"
+    "direnv"
+    "gnupg"
+    "kubernetes-cli"
+    "tree"
+    "watchman"
+    "yq"
+    "lsd"
+    "docker"
+    "docker-compose"
+    "starship"
+    "yazi"
+)
