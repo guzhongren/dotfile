@@ -175,6 +175,7 @@ install_zsh() {
     fi
 }
 
+
 install_infra() {
     echo "🍗 Start to install infra..."
     install_homebrew;
