@@ -184,7 +184,8 @@ install_infra() {
 }
 
 config_fisher() {
-  curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
+  curl -sL https://git.io/fisher | source
+  fisher install jorgebucaran/fisher
   fisher install jethrokuan/z
   fisher install jorgebucaran/autopair.fish
   fisher install PatrickF1/fzf.fish

@@ -5,9 +5,7 @@ if status is-interactive
 
     # 自定义别名
     alias gpr "git pull --rebase"
-    alias gfp "git fetch --prune"
-    alias gclean "git clean -fd"
-    alias gundo "git reset --soft HEAD~1"
+    alias gcmsg "git commit -m"
 
     # 彩色输出
     set -g fish_color_git_clean green
@@ -52,3 +50,5 @@ mise reshim
 
 # Starship prompt
 starship init fish | source
+
+# git cmd alias
