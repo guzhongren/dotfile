@@ -5,8 +5,8 @@ source ./utils.sh
 dir=$(pwd)
 cd ~ || exit
 
-# zshrc
-ln -sf "${dir}"/config/zsh/.zshrc .zshrc
+# # zshrc
+# ln -sf "${dir}"/config/zsh/.zshrc .zshrc
 
 
 # gnupg
@@ -30,6 +30,8 @@ git config --global tag.forceSignAnnotated true
 echo "pinentry-program $(which pinentry-tty)" >> ~/.gnupg/gpg-agent.conf
 gpgconf --reload gpg-agent
 
+## fish
+ln -sf "${dir}"/config/fish/config.fish ~/.config/fish/config.fish
 
 # mise
 mise completion zsh

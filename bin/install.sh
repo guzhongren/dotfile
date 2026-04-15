@@ -178,7 +178,7 @@ install_zsh() {
 install_infra() {
     echo "🍗 Start to install infra..."
     install_homebrew;
-    install_zsh;
+    # install_zsh;
     echo "🎉 Successfully installed infra..."
 }
 
@@ -188,6 +188,8 @@ install_infra() {
 show_todo() {
   echo "I think you have installed some necessary softwares on your laptop now. But there are some things need to be done on your side.
 
+  echo "Execute the below command to config the fish."
+  echo "chsh -s '$(which fish)'"
 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
 🎉        Have a good journey!                 🎉
 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉

@@ -17,4 +17,5 @@ tool_list=(
     "docker-compose"
     "starship"
     "yazi"
+    "fish"
 )
