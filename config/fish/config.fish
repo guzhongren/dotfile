@@ -1,5 +1,18 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    # Git 插件配置
+    set -g plugin_git_disabled_aliases gst gsta
+
+    # 自定义别名
+    alias gpr "git pull --rebase"
+    alias gfp "git fetch --prune"
+    alias gclean "git clean -fd"
+    alias gundo "git reset --soft HEAD~1"
+
+    # 彩色输出
+    set -g fish_color_git_clean green
+    set -g fish_color_git_staged yellow
+    set -g fish_color_git_dirty red
 end
 
 # Aliases

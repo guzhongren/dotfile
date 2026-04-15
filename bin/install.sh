@@ -183,6 +183,17 @@ install_infra() {
     echo "🎉 Successfully installed infra..."
 }
 
+config_fisher() {
+  curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
+  fisher install jethrokuan/z
+  fisher install jorgebucaran/autopair.fish
+  fisher install PatrickF1/fzf.fish
+  fisher install edc/bass
+  fisher install jhillyerd/plugin-git
+
+  source ~/.config/fish/config.fish
+}
+
 ########################################base#######################################
 
 #######################################show todo#######################################
@@ -205,5 +216,7 @@ install_cask_list "${cast_list[@]}";
 install_tool_list "${tool_list[@]}";
 
 install_languagetools "${languagetool_list[@]}";
+
+config_fisher;
 
 show_todo;
