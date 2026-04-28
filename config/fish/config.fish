@@ -26,19 +26,15 @@ set -gx GPG_TTY (tty)
 set -gx HOMEBREW_NO_INSTALL_CLEANUP ""
 set -gx HOMEBREW_NO_AUTO_UPDATE true
 
-
-# libpq
-fish_add_path /opt/homebrew/opt/libpq/bin
-
 # TestContainers / Docker
 set -gx DOCKER_HOST unix:///var/run/docker.sock
 set -gx TESTCONTAINERS_HOST_OVERRIDE host.docker.internal
 set -gx TESTCONTAINERS_RYUK_DISABLED true
 
-# SSH agent
-if not pgrep -u $USER ssh-agent > /dev/null
-    eval (ssh-agent -c)
-end
+# # SSH agent
+# if not pgrep -u $USER ssh-agent > /dev/null
+#     eval (ssh-agent -c)
+# end
 
 # direnv
 direnv hook fish | source
@@ -50,5 +46,3 @@ mise reshim
 
 # Starship prompt
 starship init fish | source
-
-# git cmd alias

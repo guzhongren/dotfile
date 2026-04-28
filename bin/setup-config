@@ -9,13 +9,9 @@ cd ~ || exit
 # ln -sf "${dir}"/config/zsh/.zshrc .zshrc
 
 
-# gnupg
+# # gnupg
 check_folder_exist_or_create "$HOME/.gnupg"
 ln -sf "${dir}"/config/.gnupg/gpg-agent.conf .gnupg/gpg-agent.conf
-
-# pip
-check_folder_exist_or_create "$HOME/.pip"
-ln -sf "${dir}"/config/.pip .pip
 
 # gpg
 git config --global user.email "guzhongren@live.cn"
