@@ -23,5 +23,7 @@ jobs:
           path: "bin"
       - name: execute install.sh
         run: ./bin/install.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: execute config
         run: ./bin/setup-config
