@@ -42,4 +42,4 @@ mkdir -p ~/.config/ghostty
 ln -sf "${dir}"/config/ghostty/config ~/.config/ghostty/config
 
 # Starship
-starship preset catppuccin-powerline -o ~/.config/starship.toml
+ln -sf "${dir}"/config/starship/starship.toml ~/.config/starship.toml
