@@ -83,16 +83,8 @@ install_languagetools() {
     fi
 
     echo "Installing language tools via mise: ${to_install[*]}"
-    for t in "${to_install[@]}"; do
-        if [ "$t" = "pnpm" ]; then
-            # Use npm backend to avoid aqua registry asset naming issue (macos vs darwin)
-            mise install "npm:$t"
-            mise use -g "npm:$t"
-        else
-            mise install "$t"
-            mise use -g "$t"
-        fi
-    done
+    mise install "${to_install[@]}"
+    mise use -g "${to_install[@]}"
     echo "🎉 Successfully installed: ${to_install[*]}"
 }
 
