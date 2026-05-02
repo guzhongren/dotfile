@@ -83,6 +83,7 @@ install_languagetools() {
     fi
 
     echo "Installing language tools via mise: ${to_install[*]}"
+    mise settings set pnpm.backend npm
     mise install "${to_install[@]}"
     echo "🎉 Successfully installed: ${to_install[*]}"
 }
