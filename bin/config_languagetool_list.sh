@@ -4,5 +4,5 @@ languagetool_list=(
     "hugo"
     "pre-commit"
     "python"
-    "pnpm"
+    "npm:pnpm"
  )
