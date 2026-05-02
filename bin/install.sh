@@ -101,6 +101,7 @@ install_tool_list() {
     else
         echo "🎉 Successfully installed all tools"
     fi
+}
 
 install_homebrew() {
     if command -v brew >/dev/null 2>&1; then
@@ -199,14 +200,16 @@ config_fisher() {
 
 #######################################show todo#######################################
 show_todo() {
-  echo "I think you have installed some necessary softwares on your laptop now. But there are some things need to be done on your side.
+  cat <<EOF
+I think you have installed some necessary softwares on your laptop now. But there are some things need to be done on your side.
 
-  echo "Execute the below command to config the fish."
-  echo "chsh -s '$(which fish)'"
+Execute the below command to config the fish.
+chsh -s '$(which fish)'
+
 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
 🎉        Have a good journey!                 🎉
 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
-  "
+EOF
 }
 #######################################show todo#######################################
 
