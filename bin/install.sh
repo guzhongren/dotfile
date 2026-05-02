@@ -185,6 +185,7 @@ install_infra() {
 }
 
 config_fisher() {
+  fish
   curl -sL https://git.io/fisher | source
   fisher install jorgebucaran/fisher
   fisher install jethrokuan/z
