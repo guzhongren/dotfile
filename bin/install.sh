@@ -83,8 +83,16 @@ install_languagetools() {
     fi
 
     echo "Installing language tools via mise: ${to_install[*]}"
-    mise install "${to_install[@]}"
-    mise use -g "${to_install[@]}"
+    for t in "${to_install[@]}"; do
+        if [ "$t" = "pnpm" ]; then
+            # Use npm backend to avoid aqua registry asset naming issue (macos vs darwin)
+            mise install "npm:$t"
+            mise use -g "npm:$t"
+        else
+            mise install "$t"
+            mise use -g "$t"
+        fi
+    done
     echo "🎉 Successfully installed: ${to_install[*]}"
 }
 
@@ -185,16 +193,15 @@ install_infra() {
 }
 
 config_fisher() {
-  fish
-  curl -sL https://git.io/fisher | source
-  fisher install jorgebucaran/fisher
-  fisher install jethrokuan/z
-  fisher install jorgebucaran/autopair.fish
-  fisher install PatrickF1/fzf.fish
-  fisher install edc/bass
-  fisher install jhillyerd/plugin-git
-
-  source ~/.config/fish/config.fish
+  fish -c "
+    curl -sL https://git.io/fisher | source
+    fisher install jorgebucaran/fisher
+    fisher install jethrokuan/z
+    fisher install jorgebucaran/autopair.fish
+    fisher install PatrickF1/fzf.fish
+    fisher install edc/bass
+    fisher install jhillyerd/plugin-git
+  "
 }
 
 ########################################base#######################################
