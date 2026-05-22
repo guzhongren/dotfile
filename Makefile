@@ -19,29 +19,19 @@ help list:            ## Show available targets
 	@echo "  Stages are idempotent and can be re-run safely."
 
 pre-config:
-	@echo ">>> pre-config"
 	@$(SCRIPTS_DIR)/pre-config.sh
-	@echo "<<< pre-config done"
 
 pre-install:
-	@echo ">>> pre-install"
 	@$(SCRIPTS_DIR)/pre-install.sh
-	@echo "<<< pre-install done"
 
 install:
-	@echo ">>> install"
 	@$(SCRIPTS_DIR)/install.sh
-	@echo "<<< install done"
 
 post-install:
-	@echo ">>> post-install"
 	@$(SCRIPTS_DIR)/post-install.sh
-	@echo "<<< post-install done"
 
 finalize:
-	@echo ">>> finalize"
 	@$(SCRIPTS_DIR)/finalize.sh
-	@echo "<<< finalize done"
 
 all: pre-config pre-install install post-install finalize
 
