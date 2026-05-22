@@ -9,9 +9,7 @@ source "${SCRIPT_DIR}/../bin/config_languagetool_list.sh"
 
 ensure_brew_env
 
-echo "============================================"
-echo " Software Installation"
-echo "============================================"
+stage_header "Software Installation"
 
 echo ""
 echo "--- Installing GUI apps (casks) ---"
@@ -25,6 +23,4 @@ echo ""
 echo "--- Installing language tools (mise) ---"
 install_languagetools "${languagetool_list[@]}"
 
-echo "============================================"
-echo " install complete"
-echo "============================================"
+stage_footer "install"

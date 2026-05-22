@@ -1,128 +1,177 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-function command_exists() {
-  if [ $# -lt 1 ]; then
-    return 1
-  fi
+# ── Logging ──────────────────────────────────────────────
 
-  if command -v "$1" >/dev/null 2>&1; then
-    if [ "${VERBOSE:-false}" = "true" ]; then
-      echo "🚀 ${1} has installed!"
+log_info()    { echo "✅ $1"; }
+log_install() { echo "🍗 $1"; }
+log_success() { echo "🎉 $1"; }
+log_warn()    { echo "⚠️  $1"; }
+
+# ── Stage helpers ────────────────────────────────────────
+
+stage_header() {
+    echo "============================================"
+    echo " $1"
+    echo "============================================"
+}
+
+stage_footer() {
+    echo "============================================"
+    echo " $1 complete"
+    echo "============================================"
+}
+
+# ── Command checks ───────────────────────────────────────
+
+command_exists() {
+    if [ $# -lt 1 ]; then
+        return 1
     fi
-    return 0
-  else
-    if [ "${VERBOSE:-false}" = "true" ]; then
-      echo "⚠️ Command: ${1} has not installed!"
+
+    if command -v "$1" >/dev/null 2>&1; then
+        if [ "${VERBOSE:-false}" = "true" ]; then
+            log_info "${1} has installed!"
+        fi
+        return 0
+    else
+        if [ "${VERBOSE:-false}" = "true" ]; then
+            log_warn "Command: ${1} has not installed!"
+        fi
+        return 1
     fi
-    return 1
-  fi
 }
 
-function install() {
-  command_exists "${1}"
-  checked_result=$?
-  echo "${checked_result}"
-  if [ ${checked_result} != '0' ]; then
-    echo 'Start to install' "${1}."
-    brew install "${1}"
-    echo 'Successfully installed' "${1}!"
-  fi
-}
-
-
-function install_cask() {
-  command_exists "${1}"
-  if ! command_exists "${1}"; then
-    echo "Start to install ${1}."
-    brew install --cask "$1"
-    echo "🚀 Successfully installed ${1}!"
-  fi
-}
-
+# ── Filesystem ───────────────────────────────────────────
 
 check_folder_exist_or_create() {
-  local folder_name="$1"
-  if [ ! -d "${folder_name}" ];then
-    mkdir -p "$folder_name"
-  else
-    echo "💡 Folder: ${folder_name} is existing!"
-  fi
-  echo "🚀 Successfully created ${folder_name}!"
+    local folder_name="$1"
+    if [ -d "${folder_name}" ]; then
+        echo "💡 Folder: ${folder_name} is existing!"
+    else
+        mkdir -p "$folder_name"
+        log_success "Successfully created ${folder_name}!"
+    fi
 }
 
-todo() {
-  echo "⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕==Todo==⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕"
-  echo "${1}"
-  echo "⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕==Todo==⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕"
+link_dotfile() {
+    local src="$1"
+    local dest="$2"
+    local dir
+    dir="$(dirname "$dest")"
+    check_folder_exist_or_create "$dir"
+    ln -sf "$src" "$dest"
+    log_info "$(basename "$dest") linked"
 }
+
+# ── Notifications ────────────────────────────────────────
+
+todo() {
+    echo "⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕==Todo==⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕"
+    echo "${1}"
+    echo "⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕==Todo==⭕⭕⭕⭕⭕⭕⭕⭕⭕⭕"
+}
+
+show_todo() {
+    cat <<EOF
+I think you have installed some necessary softwares on your laptop now. But there are some things need to be done on your side.
+
+Import your GPG private/public key via gpg --import private/public.key
+
+🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
+🎉            Restart your termial to use config!             🎉
+🎉                  Have a good journey!                      🎉
+🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
+EOF
+}
+
+# ── Brew environment ─────────────────────────────────────
 
 ensure_brew_env() {
     if command -v brew >/dev/null 2>&1; then
         eval "$(brew shellenv)"
+        export BREW_BIN="$(command -v brew)"
         return 0
     fi
 
     for brew_path in /opt/homebrew/bin/brew /usr/local/bin/brew; do
         if [ -x "$brew_path" ]; then
             eval "$("$brew_path" shellenv)"
+            export BREW_BIN="$brew_path"
             return 0
         fi
     done
 }
 
-check_installed_apps() {
-    local installed_apps=()
-    local brew_casks
-    brew_casks=$(brew list --cask 2>/dev/null)
+# ── Brew package lists ──────────────────────────────────
 
-    for app in "${@}"; do
-        if ! echo "$brew_casks" | grep -q "$app"; then
-            installed_apps+=("$app")
+_brew_list_installed() {
+    local type="$1"  # "cask" or "formula"
+    shift
+    local items=("$@")
+
+    local installed
+    if [ "$type" = "cask" ]; then
+        installed=$(brew list --cask 2>/dev/null)
+    else
+        installed=$(brew list 2>/dev/null)
+    fi
+
+    local missing=()
+    for item in "${items[@]}"; do
+        if ! echo "$installed" | grep -qxF "$item"; then
+            missing+=("$item")
         fi
     done
 
-    if [ ${#installed_apps[@]} -gt 0 ]; then
-        echo "${installed_apps[@]}"
+    if [ ${#missing[@]} -gt 0 ]; then
+        echo "${missing[@]}"
     fi
 }
 
+check_installed_apps() {
+    _brew_list_installed "cask" "$@"
+}
 
 check_installed_tool() {
-    local installed_tool_list=()
-    local brew_packages
-    brew_packages=$(brew list 2>/dev/null)
+    _brew_list_installed "formula" "$@"
+}
 
-    for tool_name in "$@"; do
-        if ! echo "$brew_packages" | grep -q "${tool_name}"; then
-            installed_tool_list+=("$tool_name")
-        fi
-    done
+# ── Bulk installers ──────────────────────────────────────
 
-    if [ ${#installed_tool_list[@]} -gt 0 ]; then
-        echo "${installed_tool_list[@]}"
+install_cask_list() {
+    local missing
+    missing=$(check_installed_apps "$@")
+    echo "Not installed apps: $missing"
+    if [ -n "$missing" ]; then
+        for app_name in $missing; do
+            log_install "Start to install the app: ${app_name}"
+            brew install --cask "${app_name}"
+            log_success "Successfully install the app: ${app_name}"
+        done
+    else
+        log_success "All apps are installed already"
     fi
 }
 
-install_cask_list() {
-    local app_list=("$@")
-
-    not_installed_app_list=$(check_installed_apps "${app_list[@]}")
-    echo "Not installed apps: $not_installed_app_list"
-    if [ -n "$not_installed_app_list" ]; then
-        for app_name in $not_installed_app_list; do
-            echo "🍗 Start to install the app: ${app_name}"
-            brew install --cask "${app_name}"
-            echo "🎉 Successfully install the app: ${app_name}"
+install_tool_list() {
+    local missing
+    missing=$(check_installed_tool "$@")
+    echo "Not installed tools: $missing"
+    if [ -n "$missing" ]; then
+        # brew can batch-install multiple packages
+        for tool_name in $missing; do
+            log_install "Start to install the tool: ${tool_name}"
+            brew install "${tool_name}"
+            log_success "Successfully install the tool: ${tool_name}"
         done
     else
-        echo "🎉 All apps are installed already"
+        log_success "Successfully installed all tools"
     fi
 }
 
 install_languagetools() {
     local requested_tools=("${@}")
-    local to_install=()
 
     if ! command_exists "mise"; then
         echo "mise not found, installing mise first..."
@@ -134,48 +183,24 @@ install_languagetools() {
         fi
     fi
 
-    for t in "${requested_tools[@]}"; do
-        if command_exists "${t}"; then
-            echo "✅ ${t} is already installed; skipping"
-        else
-            to_install+=("${t}")
-        fi
-    done
-
-    if [ ${#to_install[@]} -eq 0 ]; then
-        echo "🎉 All requested language tools are already installed"
-        return 0
-    fi
-
-    echo "Installing language tools via mise: ${to_install[*]}"
-    mise install "${to_install[@]}"
-    mise use -g "${to_install[@]}"
-    echo "🎉 Successfully installed: ${to_install[*]}"
+    mkdir -p "$HOME/.config/mise"
+    echo "Installing language tools via mise: ${requested_tools[*]}"
+    mise install "${requested_tools[@]}"
+    mise use -g "${requested_tools[@]}"
+    log_success "Successfully installed: ${requested_tools[*]}"
 }
 
-install_tool_list() {
-    not_installed_tool_list=$(check_installed_tool "$@")
-    echo "Not installed tools: $not_installed_tool_list"
-    if [ -n "$not_installed_tool_list" ]; then
-        for tool_name in $not_installed_tool_list; do
-            echo "🍗 Start to install the tool: ${tool_name}"
-            brew install "${tool_name}"
-            echo "🎉 Successfully install the tool: ${tool_name}"
-        done
+# ── ZSH plugins ─────────────────────────────────────────
+
+install_omz_plugin() {
+    local name="$1"
+    local repo_url="$2"
+    local dir="${ZSH_CUSTOM_DIR:?}/${name}"
+
+    if [ ! -d "$dir" ]; then
+        git clone --depth 1 "$repo_url" "$dir"
+        log_info "${name} installed"
     else
-        echo "🎉 Successfully installed all tools"
+        log_info "${name} already present"
     fi
-}
-
-show_todo() {
-  cat <<EOF
-I think you have installed some necessary softwares on your laptop now. But there are some things need to be done on your side.
-
-Import your GPG private/public key via gpg --import private/public.key
-
-🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
-🎉            Restart your termial to use config!             🎉
-🎉                  Have a good journey!                      🎉
-🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
-EOF
 }
