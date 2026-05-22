@@ -20,5 +20,3 @@ check_tool "fish"
 
 echo ""
 show_todo
-
-stage_footer "finalize"
