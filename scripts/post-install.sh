@@ -20,6 +20,7 @@ create_syslinks() {
   link_dotfile "${REPO_ROOT}/config/fish/config.fish" "$HOME/.config/fish/config.fish"
   link_dotfile "${REPO_ROOT}/config/ghostty/config" "$HOME/.config/ghostty/config"
   link_dotfile "${REPO_ROOT}/config/starship/starship.toml" "$HOME/.config/starship.toml"
+  link_dotfile "${REPO_ROOT}/config/zed/settings.json" "$HOME/.config/zed/settings.json"
 }
 
 
