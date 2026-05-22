@@ -15,4 +15,6 @@ cast_list=(
     "iina"
     "folo"
     "neteasemusic"
+    "font-maple-mono-cn"
+    "font-fira-code-nerd-font"
 )
