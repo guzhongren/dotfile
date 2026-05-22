@@ -1,6 +1,6 @@
 # Awesome Setup
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguzhongren%2Fawesome-setup.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguzhongren%2Fawesome-setup?ref=badge_shield)
 
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguzhongren%2Fawesome-setup.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguzhongren%2Fawesome-setup?ref=badge_shield)
 
 A list of script to setup your PC.
 
@@ -9,28 +9,42 @@ A list of script to setup your PC.
 ## Local dev env
 
 ```sh
-
+git clone https://github.com/guzhongren/dotfile.git ~/.dotfile
+cd ~/.dotfile
+make all
 ```
 
 ## Usage
 
-### Install software
+### Full automated setup
+
+```shell
+make all
+# or
+make setup
+```
+
+This runs all stages in order: pre-config → pre-install → install → post-install → finalize.
+
+### Selective stages
+
+Each stage can be run independently:
+
+```shell
+make pre-config      # System checks (OS, Xcode, git config, SSH keys)
+make pre-install     # Package managers (Homebrew, mise)
+make install         # Software installation (casks, CLI tools, language tools)
+make post-install    # Shell/plugin setup, symlinks, git/GPG config
+make finalize        # Verify installation, show manual steps
+```
+
+All stages are idempotent — safe to re-run.
+
+### Remote one-liner (install.sh only)
 
 ```shell
 sh -c "$(curl -fsSL 'https://raw.githubusercontent.com/guzhongren/dotfile/refs/heads/main/bin/install.sh?token=xxxx')"
 ```
-
-#### Note
-Click the `Raw` button for the `./bin/install.sh`
-
-### Install config
-
-```shell
-sh -c "$(curl -fsSL 'https://raw.githubusercontent.com/guzhongren/dotfile/refs/heads/main/bin/setup-config?token=xxxx')"
-```
-
-#### Note
-Click the `Raw` button for the `./bin/setup-config`
 
 ## Manually work
 

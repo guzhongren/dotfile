@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./utils.sh
+. ./scripts/lib/utils.sh
 
 list=("ll" "find")
 
