@@ -37,6 +37,9 @@ echo "--- Configuring GPG ---"
 chmod 700 ~/.gnupg
 chmod 600 ~/.gnupg/*
 
+killall gpg-agent
+gpgconf --kill gpg-agent
+
 gpg --list-secret-keys --keyid-format=long || true
 git config --global user.signingkey D18AEC180356622D
 git config --global commit.gpgSign true
