@@ -15,7 +15,7 @@ stage_header "Shell & Config"
 create_syslinks() {
   echo ""
   echo "--- Creating symlinks ---"
-  
+
   link_dotfile "${REPO_ROOT}/config/.gnupg/gpg-agent.conf" "$HOME/.gnupg/gpg-agent.conf"
   link_dotfile "${REPO_ROOT}/config/fish/config.fish" "$HOME/.config/fish/config.fish"
   link_dotfile "${REPO_ROOT}/config/ghostty/config" "$HOME/.config/ghostty/config"
@@ -28,16 +28,16 @@ create_syslinks() {
 config_gpg() {
   echo ""
   echo "--- Configuring GPG ---"
-  
+
   chmod 700 ~/.gnupg
   find ~/.gnupg -type f -exec chmod 600 {} + 2>/dev/null || true
   gpgconf --kill gpg-agent 2>/dev/null || true
-  
+
   gpg --list-secret-keys --keyid-format=long || true
   git config --global user.signingkey "$GPG_SIGNING_KEY"
   git config --global commit.gpgSign true
   git config --global tag.forceSignAnnotated true
-  
+
   PINENTRY_PROG="$(which pinentry-tty 2>/dev/null || echo "/opt/homebrew/bin/pinentry-tty")"
   if ! grep -Fq "pinentry-program" "$HOME/.gnupg/gpg-agent.conf" 2>/dev/null; then
       echo "pinentry-program ${PINENTRY_PROG}" >> "$HOME/.gnupg/gpg-agent.conf"
@@ -46,7 +46,7 @@ config_gpg() {
       log_info "pinentry-program already configured in gpg-agent.conf"
   fi
   gpgconf --reload gpg-agent 2>/dev/null || true
-  
+
   todo "Need to import those GPG keys: private.key, public.key!"
 }
 
@@ -55,18 +55,18 @@ config_gpg() {
 install_config_zsh() {
   echo ""
   echo "--- Setting up Oh My Zsh ---"
-  
+
   ZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
-  
+
   if [ -d "$ZSH_DIR" ]; then
       log_info "Oh My Zsh already installed at $ZSH_DIR"
   else
       log_install "Installing Oh My Zsh..."
       RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
-  
+
   export ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-${ZSH_DIR}/custom}"
-  
+
   install_omz_plugin "zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
   install_omz_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting.git"
   install_omz_plugin "zsh-completions" "https://github.com/zsh-users/zsh-completions"
@@ -77,7 +77,7 @@ install_config_zsh() {
 install_cofig_fish() {
   echo ""
   echo "--- Setting up Fisher ---"
-  
+
   if command_exists "fish"; then
       if fish -c "type fisher" >/dev/null 2>&1; then
           log_info "Fisher already installed"
@@ -92,8 +92,8 @@ install_cofig_fish() {
   else
       log_warn "fish not found, skipping Fisher setup"
   fi
-  
-  
+
+
 
 }
 
