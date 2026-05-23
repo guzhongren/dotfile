@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "ui_font_family": "Maple Mono CN",
+  "buffer_font_family": "Maple Mono CN",
+  "icon_theme": "VSCode Icons for Zed (Dark)",
   "use_system_window_tabs": true,
   "show_whitespaces": "all",
   "cli_default_open_behavior": "existing_window",
