@@ -129,7 +129,7 @@ conig_mise() {
 
 config_ai_compresses() {
   mkdir -p ~/.claude
-  yes | rtk init -g
+  rtk init -g --auto-patch
   rtk telemetry disable
 }
 
