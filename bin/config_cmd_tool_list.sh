@@ -18,4 +18,9 @@ tool_list=(
     "starship"
     "yazi"
     "fish"
+    "ripgrep"
+    "fd"
+    "fzf"
+    # For AI
+    "rtk"
 )

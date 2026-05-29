@@ -127,11 +127,17 @@ conig_mise() {
   fi
 }
 
+config_ai_compresses() {
+  rtk init -g
+  rtk telemetry disable
+}
+
 create_syslinks;
 config_gpg;
 # install_config_zsh;
 install_cofig_fish;
 shell_change;
 conig_mise;
+config_ai_compresses;
 
 stage_footer "post-install"
