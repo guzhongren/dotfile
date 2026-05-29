@@ -15,12 +15,4 @@ if [ -n "${BREW_BIN:-}" ] && ! grep -Fq "brew shellenv" "$HOME/.zprofile" 2>/dev
     printf '\neval "$(%s shellenv)"\n' "$BREW_BIN" >> "$HOME/.zprofile"
 fi
 
-if command_exists "mise"; then
-    log_info "mise already installed"
-else
-    log_install "Installing mise via Homebrew..."
-    brew install mise
-    log_success "mise installed"
-fi
-
 stage_footer "pre-install"
