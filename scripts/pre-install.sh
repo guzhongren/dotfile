@@ -7,7 +7,6 @@ source "${SCRIPT_DIR}/lib/utils.sh"
 stage_header "pre-install — Package Managers"
 
 ensure_brew_env
-brew update
 
 # Add brew shellenv to ~/.zprofile for future shells
 if [ -n "${BREW_BIN:-}" ] && ! grep -Fq "brew shellenv" "$HOME/.zprofile" 2>/dev/null; then
