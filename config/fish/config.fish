@@ -46,3 +46,19 @@ mise reshim
 
 # Starship prompt
 starship init fish | source
+
+# fzf fish integration
+fzf --fish | source
+
+# Use fd for fzf source
+set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
+set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --follow --exclude .git'
+
+# Preview files with bat
+set -gx FZF_CTRL_T_OPTS "--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+set -gx FZF_DEFAULT_OPTS "--height 40% --layout=reverse --border"
+
+# Handy aliases
+alias rg 'rg --hidden --glob !.git'
+alias cat 'bat --paging=never'
