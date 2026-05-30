@@ -184,10 +184,28 @@ install_languagetools() {
     fi
 
     mkdir -p "$HOME/.config/mise"
-    echo "Installing language tools via mise: ${requested_tools[*]}"
-    mise install "${requested_tools[@]}"
+
+    # Check which tools are already installed via mise
+    local missing=()
+    for tool in "${requested_tools[@]}"; do
+        # Extract the actual command name (strip backend prefix like "npm:")
+        local cmd_name="${tool#*:}"
+        if command_exists "$cmd_name"; then
+            log_info "Already installed: ${tool}"
+        else
+            missing+=("$tool")
+        fi
+    done
+
+    if [ ${#missing[@]} -eq 0 ]; then
+        log_success "All language tools are already installed"
+        return 0
+    fi
+
+    echo "Installing language tools via mise: ${missing[*]}"
+    mise install "${missing[@]}"
     mise use -g "${requested_tools[@]}"
-    log_success "Successfully installed: ${requested_tools[*]}"
+    log_success "Successfully installed: ${missing[*]}"
 }
 
 # ── ZSH plugins ─────────────────────────────────────────

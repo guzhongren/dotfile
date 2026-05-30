@@ -21,6 +21,7 @@ tool_list=(
     "ripgrep"
     "fd"
     "fzf"
+    "bat"
     # For AI
     "rtk"
 )
