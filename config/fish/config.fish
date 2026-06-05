@@ -62,3 +62,10 @@ set -gx FZF_DEFAULT_OPTS "--height 40% --layout=reverse --border"
 # Handy aliases
 alias rg 'rg --hidden --glob !.git'
 alias cat 'bat --paging=never'
+
+# pnpm
+set -gx PNPM_HOME "~/Library/pnpm"
+if not string match -q -- "$PNPM_HOME/bin" $PATH
+  set -gx PATH "$PNPM_HOME/bin" $PATH
+end
+# pnpm end
