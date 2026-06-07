@@ -18,6 +18,7 @@ tool_list=(
     "docker"
     "docker-compose"
     "starship"
+    "gh"
     "yazi"
     "fish"
     "ripgrep"
