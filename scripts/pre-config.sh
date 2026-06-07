@@ -28,6 +28,13 @@ git config --global user.email "$GIT_USER_EMAIL"
 git config --global user.name "$GIT_USER_NAME"
 log_info "Git identity configured: ${GIT_USER_NAME} <${GIT_USER_EMAIL}>"
 
+# Git ignore globally
+git config --global core.excludesfile ~/.gitignore_global
+cat > ~/.gitignore_global <<'EOF'
+.codegraph/
+.claude/
+EOF
+
 if [ ! -f "$HOME/.ssh/id_ed25519" ] && [ ! -f "$HOME/.ssh/id_rsa" ]; then
     todo "No SSH key found (~/.ssh/id_ed25519 or ~/.ssh/id_rsa). Generate one with: ssh-keygen -t ed25519 -C '${GIT_USER_EMAIL}'"
 fi
