@@ -90,7 +90,8 @@ EOF
 ensure_brew_env() {
     if command -v brew >/dev/null 2>&1; then
         eval "$(brew shellenv)"
-        export BREW_BIN="$(command -v brew)"
+        BREW_BIN="$(command -v brew)"
+        export BREW_BIN
         return 0
     fi
 

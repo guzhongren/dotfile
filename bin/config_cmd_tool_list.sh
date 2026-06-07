@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034
 
 tool_list=(
     "mise"
@@ -16,6 +18,7 @@ tool_list=(
     "docker"
     "docker-compose"
     "starship"
+    "gh"
     "yazi"
     "fish"
     "ripgrep"

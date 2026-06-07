@@ -2,6 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck disable=SC1091
 source "${SCRIPT_DIR}/lib/utils.sh"
 
 stage_header "pre-install — Package Managers"
@@ -11,6 +12,7 @@ ensure_brew_env
 # Add brew shellenv to ~/.zprofile for future shells
 if [ -n "${BREW_BIN:-}" ] && ! grep -Fq "brew shellenv" "$HOME/.zprofile" 2>/dev/null; then
     echo "Adding Homebrew shellenv to ~/.zprofile"
+    # shellcheck disable=SC2016
     printf '\neval "$(%s shellenv)"\n' "$BREW_BIN" >> "$HOME/.zprofile"
 fi
 
