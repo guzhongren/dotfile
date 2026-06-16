@@ -135,6 +135,12 @@ config_ai_compresses() {
   rtk telemetry disable
 }
 
+config_hot_corner() {
+  defaults write com.apple.dock wvous-br-corner -int 13
+  defaults write com.apple.dock wvous-br-modifier -int 0
+  killall Dock
+}
+
 create_syslinks;
 config_gpg;
 # install_config_zsh;
@@ -142,5 +148,6 @@ install_cofig_fish;
 shell_change;
 conig_mise;
 config_ai_compresses;
+config_hot_corner;
 
 stage_footer "post-install"
