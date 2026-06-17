@@ -2,6 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 # shellcheck disable=SC1091
 source "${SCRIPT_DIR}/lib/utils.sh"
 # shellcheck disable=SC1091
@@ -28,12 +29,11 @@ git config --global user.email "$GIT_USER_EMAIL"
 git config --global user.name "$GIT_USER_NAME"
 log_info "Git identity configured: ${GIT_USER_NAME} <${GIT_USER_EMAIL}>"
 
-# Git ignore globally
-git config --global core.excludesfile ~/.gitignore_global
-cat > ~/.gitignore_global <<'EOF'
-.codegraph/
-.claude/
-EOF
+# Git config globally
+link_dotfile "${REPO_ROOT}/config/git/.gitconfig" "$HOME/.gitconfig"
+link_dotfile "${REPO_ROOT}/config/git/.gitconfig-client" "$HOME/.gitconfig-client"
+link_dotfile "${REPO_ROOT}/config/git/.gitconfig-personal" "$HOME/.gitconfig-personal"
+link_dotfile "${REPO_ROOT}/config/git/.gitignore-global" "$HOME/.gitignore-global"
 
 if [ ! -f "$HOME/.ssh/id_ed25519" ] && [ ! -f "$HOME/.ssh/id_rsa" ]; then
     todo "No SSH key found (~/.ssh/id_ed25519 or ~/.ssh/id_rsa). Generate one with: ssh-keygen -t ed25519 -C '${GIT_USER_EMAIL}'"

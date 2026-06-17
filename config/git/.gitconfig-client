@@ -1,0 +1,6 @@
+[user]
+  email = zhongren.gu@client.com
+  name = zhongren.gu
+  signingkey = gpg-key-id
+[core]
+  sshCommand = ssh -i ~/.ssh/id_ed25519_client -o IdentitiesOnly=yes -p 65422

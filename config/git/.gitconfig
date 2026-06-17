@@ -1,0 +1,16 @@
+[user]
+  email = guzhongren@live.cn
+  name = guzhongren
+	signingkey = D18AEC180356622D
+[commit]
+	gpgSign = true
+[tag]
+	forceSignAnnotated = true
+[core]
+  excludesfile = ~/.gitignore-global
+
+[includeIf "gitdir:~/01.clients/"]
+  path = ~/.gitconfig-client
+
+[includeIf "gitdir:~/02.personal/"]
+  path = ~/.gitconfig-personal
