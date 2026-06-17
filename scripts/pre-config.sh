@@ -25,18 +25,31 @@ else
     exit 1
 fi
 
-git config --global user.email "$GIT_USER_EMAIL"
-git config --global user.name "$GIT_USER_NAME"
-log_info "Git identity configured: ${GIT_USER_NAME} <${GIT_USER_EMAIL}>"
+config_git_infra() {
+  git config --global user.email "$GIT_USER_EMAIL"
+  git config --global user.name "$GIT_USER_NAME"
+  log_info "Git identity configured: ${GIT_USER_NAME} <${GIT_USER_EMAIL}>"
 
-# Git config globally
-link_dotfile "${REPO_ROOT}/config/git/.gitconfig" "$HOME/.gitconfig"
-link_dotfile "${REPO_ROOT}/config/git/.gitconfig-client" "$HOME/.gitconfig-client"
-link_dotfile "${REPO_ROOT}/config/git/.gitconfig-personal" "$HOME/.gitconfig-personal"
-link_dotfile "${REPO_ROOT}/config/git/.gitignore-global" "$HOME/.gitignore-global"
+  # Git config globally
+  link_dotfile "${REPO_ROOT}/config/git/.gitconfig" "$HOME/.gitconfig"
+  link_dotfile "${REPO_ROOT}/config/git/.gitconfig-client" "$HOME/.gitconfig-client"
+  link_dotfile "${REPO_ROOT}/config/git/.gitconfig-personal" "$HOME/.gitconfig-personal"
+  link_dotfile "${REPO_ROOT}/config/git/.gitignore-global" "$HOME/.gitignore-global"
+}
 
-if [ ! -f "$HOME/.ssh/id_ed25519" ] && [ ! -f "$HOME/.ssh/id_rsa" ]; then
+show_ssh_todo() {
+  if [ ! -f "$HOME/.ssh/id_ed25519" ] && [ ! -f "$HOME/.ssh/id_rsa" ]; then
     todo "No SSH key found (~/.ssh/id_ed25519 or ~/.ssh/id_rsa). Generate one with: ssh-keygen -t ed25519 -C '${GIT_USER_EMAIL}'"
-fi
+  fi
+}
+
+create_base_folders() {
+  check_folder_exist_or_create "$HOME/01.clients"
+  check_folder_exist_or_create "$HOME/02.personal"
+}
+
+create_base_folders;
+show_ssh_todo;
+config_git_infra;
 
 stage_footer "pre-config"

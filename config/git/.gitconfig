@@ -1,6 +1,6 @@
 [user]
-  email = guzhongren@live.cn
-  name = guzhongren
+	email = guzhongren@live.cn
+	name = guzhongren
 	signingkey = D18AEC180356622D
 [commit]
 	gpgSign = true
