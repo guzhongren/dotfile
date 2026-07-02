@@ -76,6 +76,9 @@ keybind = cmd+shift+f=toggle_split_zoom
 # Reload config
 keybind = cmd+shift+comma=reload_config
 
+# macOS Option as Alt (for word jump, etc.)
+macos-option-as-alt = true
+
 # --- Performance ---
 # Generous scrollback (25MB)
 scrollback-limit = 25000000
