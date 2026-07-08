@@ -141,6 +141,12 @@ config_hot_corner() {
   killall Dock
 }
 
+config_clipboard_history_in_spotlight() {
+  defaults write com.apple.spotlight PasteboardHistoryEnabled -int 1
+  defaults write com.apple.spotlight PasteboardHistoryTimeout -int 604800
+  killall cfprefsd
+}
+
 create_syslinks;
 config_gpg;
 # install_config_zsh;
@@ -149,5 +155,6 @@ shell_change;
 conig_mise;
 config_ai_compresses;
 config_hot_corner;
+config_clipboard_history_in_spotlight;
 
 stage_footer "post-install"
