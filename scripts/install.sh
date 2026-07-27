@@ -15,6 +15,18 @@ ensure_brew_env
 
 stage_header "Software Installation"
 
+
+install_ai_tools() {
+  if ! command_exists "codegraph"; then
+    curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
+  fi
+
+  if ! command_exists "graphify"; then
+    uv tool install graphifyy
+    graphify install
+  fi
+}
+
 echo ""
 echo "--- Installing GUI apps (casks) ---"
 # shellcheck disable=SC2154
@@ -29,5 +41,9 @@ echo ""
 echo "--- Installing language tools (mise) ---"
 # shellcheck disable=SC2154
 install_languagetools "${languagetool_list[@]}"
+
+echo ""
+echo "--- Installing language tools (mise) ---"
+install_ai_tools
 
 stage_footer "install"
