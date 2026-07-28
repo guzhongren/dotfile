@@ -13,6 +13,8 @@ if status is-interactive
     set -g fish_color_git_dirty red
 end
 
+set -gx PATH ~/.local/bin $PATH
+
 # Aliases
 alias ls lsd
 alias daily "cd '$HOME/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'"
