@@ -23,6 +23,7 @@ install_ai_tools() {
 
   if ! command_exists "graphify"; then
     uv tool install graphifyy
+    export PATH="$HOME/.local/bin:$PATH"
     graphify install
   fi
 }
