@@ -25,8 +25,11 @@ alias k kubectl
 set -gx GPG_TTY (tty)
 
 # Homebrew
-set -gx HOMEBREW_NO_INSTALL_CLEANUP ""
-set -gx HOMEBREW_NO_AUTO_UPDATE true
+set -gx HOMEBREW_BREW_GIT_REMOTE "https://mirrors.ustc.edu.cn/brew.git"
+set -gx HOMEBREW_CORE_GIT_REMOTE "https://mirrors.ustc.edu.cn/homebrew-core.git"
+set -gx HOMEBREW_API_DOMAIN "https://mirrors.ustc.edu.cn/homebrew-bottles/api"
+set -gx HOMEBREW_BOTTLE_DOMAIN "https://mirrors.ustc.edu.cn/homebrew-bottles"
+set -gx HOMEBREW_NO_AUTO_UPDATE 1
 
 # TestContainers / Docker
 set -gx DOCKER_HOST unix:///var/run/docker.sock
