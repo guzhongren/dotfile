@@ -27,4 +27,5 @@ tool_list=(
     "bat"
     # For AI
     "rtk"
+    "tmux"
 )

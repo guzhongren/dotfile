@@ -14,3 +14,5 @@
 
 [includeIf "gitdir:~/02.personal/"]
   path = ~/.gitconfig-personal
+[push]
+	autoSetupRemote = true
