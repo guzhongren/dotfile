@@ -19,4 +19,5 @@ cast_list=(
     "neteasemusic"
     "font-maple-mono-cn"
     "font-fira-code-nerd-font"
+    "tailscale-app"
 )
