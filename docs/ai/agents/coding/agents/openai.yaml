@@ -1,0 +1,4 @@
+interface:
+  display_name: "Coding"
+  short_description: "Full dev loop: branch, commits, tests, review, PR"
+  default_prompt: "Use $coding to implement this task end to end and open a pull request."
