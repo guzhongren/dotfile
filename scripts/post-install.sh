@@ -135,6 +135,18 @@ config_ai_compresses() {
   rtk telemetry disable
 }
 
+config_ai_agents() {
+  echo ""
+  echo "--- Linking AI agents ---"
+
+  if [ -e "$HOME/.agents" ] && [ ! -L "$HOME/.agents" ]; then
+      log_warn "$HOME/.agents exists as a real file/directory; remove it first, then re-run."
+  else
+      ln -sfn "${REPO_ROOT}/docs/ai/agents" "$HOME/.agents"
+      log_info ".agents linked to docs/ai/agents"
+  fi
+}
+
 config_hot_corner() {
   defaults write com.apple.dock wvous-br-corner -int 13
   defaults write com.apple.dock wvous-br-modifier -int 0
@@ -154,6 +166,7 @@ install_cofig_fish;
 shell_change;
 conig_mise;
 config_ai_compresses;
+config_ai_agents;
 config_hot_corner;
 config_clipboard_history_in_spotlight;
 

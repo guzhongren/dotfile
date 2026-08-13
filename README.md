@@ -21,7 +21,7 @@ Setup 分为 5 个阶段，每个阶段可独立运行且幂等（可安全重�
 | pre-config | `make pre-config` | 系统检测（macOS / Xcode CLI）、Git 身份配置、SSH key 检查 |
 | pre-install | `make pre-install` | 包管理器（Homebrew、mise） |
 | install | `make install` | 软件安装（brew casks、brew CLI tools、mise language tools） |
-| post-install | `make post-install` | 软链 dotfiles、GPG 签名、Oh My Zsh 插件、Fisher 插件、默认 Shell 切换 |
+| post-install | `make post-install` | 软链 dotfiles 与 AI agents、GPG 签名、Oh My Zsh 插件、Fisher 插件、默认 Shell 切换 |
 | finalize | `make finalize` | 验证已安装的工具、显示手动待办事项 |
 
 ```shell
@@ -50,6 +50,7 @@ dotfile/
 │   ├── config_languagetool_list.sh # 语言工具列表（mise）
 │   ├── config_user.sh           # 用户配置（Git name/email、GPG key）
 │   └── install.sh               # 兼容旧入口，delegate 到 scripts/install.sh
+├── docs/ai/agents/coding/SKILL.md # coding 技能，post-install 软链到 ~/.agents
 ├── config/
 │   ├── fish/config.fish         # Fish shell 配置
 │   ├── zsh/.zshrc               # Zsh 配置（Oh My Zsh）
