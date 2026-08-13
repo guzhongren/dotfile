@@ -16,7 +16,7 @@ cast_list=(
     "wechatwork"
     "iina"
     "folo"
-    "neteasemusic"
+    # "neteasemusic"
     "font-maple-mono-cn"
     "font-fira-code-nerd-font"
     "tailscale-app"

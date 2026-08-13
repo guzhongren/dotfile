@@ -28,6 +28,13 @@ window-theme = auto
 cursor-style = bar
 cursor-style-blink = true
 cursor-opacity = 0.8
+macos-option-as-alt = true
+keybind = alt+left=unbind
+keybind = alt+right=unbind
+# Option+Backspace: send ESC+DEL so the shell sees Alt+Backspace
+# (fish maps this to backward-kill-word; Ghostty 1.2+ removed the
+# builtin opt+backspace binding, so it must be bound explicitly).
+keybind = alt+backspace=text:\x1b\x7f
 
 # --- Mouse ---
 mouse-hide-while-typing = true
