@@ -11,6 +11,23 @@ if status is-interactive
     set -g fish_color_git_clean green
     set -g fish_color_git_staged yellow
     set -g fish_color_git_dirty red
+
+    alias ls='eza --icons'
+    alias ll='eza -l --icons'
+
+    # 搜索：grep -> rg（ripgrep）
+    alias rg 'rg --hidden --glob !.git'
+
+    alias cat 'bat --paging=never'
+
+    # 查找文件：find -> fd
+    alias find='fd'
+
+    # Edit long CLI
+    set -x EDITOR vim
+    set -x VISUAL vim
+    bind \cx\ce edit_command_buffer
+    bind \ev edit_command_buffer
 end
 
 set -gx PATH ~/.local/bin $PATH

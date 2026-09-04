@@ -25,6 +25,7 @@ tool_list=(
     "fd"
     "fzf"
     "bat"
+    "eza"
     # For AI
     "rtk"
     "tmux"
