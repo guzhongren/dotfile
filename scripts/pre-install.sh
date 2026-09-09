@@ -9,6 +9,8 @@ stage_header "pre-install — Package Managers"
 
 ensure_brew_env
 
+configure_brew_mirror
+
 # Add brew shellenv to ~/.zprofile for future shells
 if [ -n "${BREW_BIN:-}" ] && ! grep -Fq "brew shellenv" "$HOME/.zprofile" 2>/dev/null; then
     echo "Adding Homebrew shellenv to ~/.zprofile"

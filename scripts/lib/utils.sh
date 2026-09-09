@@ -87,6 +87,14 @@ EOF
 
 # ── Brew environment ─────────────────────────────────────
 
+# Homebrew mirror defaults for mainland China (USTC).
+# These apply to any script that sources utils.sh; existing values win.
+export HOMEBREW_BREW_GIT_REMOTE="${HOMEBREW_BREW_GIT_REMOTE:-https://mirrors.ustc.edu.cn/brew.git}"
+export HOMEBREW_CORE_GIT_REMOTE="${HOMEBREW_CORE_GIT_REMOTE:-https://mirrors.ustc.edu.cn/homebrew-core.git}"
+export HOMEBREW_API_DOMAIN="${HOMEBREW_API_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles/api}"
+export HOMEBREW_BOTTLE_DOMAIN="${HOMEBREW_BOTTLE_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles}"
+export HOMEBREW_NO_AUTO_UPDATE="${HOMEBREW_NO_AUTO_UPDATE:-1}"
+
 ensure_brew_env() {
     if command -v brew >/dev/null 2>&1; then
         eval "$(brew shellenv)"
@@ -102,6 +110,32 @@ ensure_brew_env() {
             return 0
         fi
     done
+}
+
+configure_brew_mirror() {
+    ensure_brew_env
+
+    local repo mirror current
+    repo="$(brew --repository 2>/dev/null || true)"
+    if [[ -z "$repo" || ! -d "$repo/.git" ]]; then
+        log_warn "Homebrew repository not found; skipping origin mirror sync"
+        return 0
+    fi
+
+    mirror="${HOMEBREW_BREW_GIT_REMOTE:-https://mirrors.ustc.edu.cn/brew.git}"
+    if git -C "$repo" remote get-url origin >/dev/null 2>&1; then
+        current="$(git -C "$repo" remote get-url origin)"
+        if [[ "$current" != "$mirror" ]]; then
+            git -C "$repo" remote set-url origin "$mirror"
+            log_info "Homebrew origin updated to ${mirror}"
+        else
+            log_info "Homebrew origin already ${mirror}"
+        fi
+    else
+        git -C "$repo" remote add origin "$mirror"
+        git -C "$repo" config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+        log_info "Homebrew origin added as ${mirror}"
+    fi
 }
 
 # ── Brew package lists ──────────────────────────────────
