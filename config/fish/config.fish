@@ -42,10 +42,10 @@ alias k kubectl
 set -gx GPG_TTY (tty)
 
 # Homebrew (USTC mirror for mainland China)
-set -gx HOMEBREW_BREW_GIT_REMOTE "https://mirrors.ustc.edu.cn/brew.git"
-set -gx HOMEBREW_CORE_GIT_REMOTE "https://mirrors.ustc.edu.cn/homebrew-core.git"
-set -gx HOMEBREW_API_DOMAIN "https://mirrors.ustc.edu.cn/homebrew-bottles/api"
-set -gx HOMEBREW_BOTTLE_DOMAIN "https://mirrors.ustc.edu.cn/homebrew-bottles"
+set -gx HOMEBREW_BREW_GIT_REMOTE "https://mirrors.aliyun.com/homebrew/brew.git"
+set -gx HOMEBREW_CORE_GIT_REMOTE "https://mirrors.aliyun.com/homebrew-core.git"
+set -gx HOMEBREW_API_DOMAIN "https://mirrors.aliyun.com/homebrew-bottles/api"
+set -gx HOMEBREW_BOTTLE_DOMAIN "https://mirrors.aliyun.com/homebrew-bottles"
 set -gx HOMEBREW_NO_AUTO_UPDATE 1
 
 # TestContainers / Docker
@@ -86,7 +86,7 @@ alias rg 'rg --hidden --glob !.git'
 alias cat 'bat --paging=never'
 
 # pnpm
-set -gx PNPM_HOME "~/Library/pnpm"
+set -gx PNPM_HOME "$HOME/Library/pnpm"
 if not string match -q -- "$PNPM_HOME/bin" $PATH
   set -gx PATH "$PNPM_HOME/bin" $PATH
 end
