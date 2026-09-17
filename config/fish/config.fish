@@ -41,12 +41,13 @@ alias k kubectl
 # GPG
 set -gx GPG_TTY (tty)
 
-# Homebrew (USTC mirror for mainland China)
-set -gx HOMEBREW_BREW_GIT_REMOTE "https://mirrors.aliyun.com/homebrew/brew.git"
-set -gx HOMEBREW_CORE_GIT_REMOTE "https://mirrors.aliyun.com/homebrew-core.git"
-set -gx HOMEBREW_API_DOMAIN "https://mirrors.aliyun.com/homebrew-bottles/api"
-set -gx HOMEBREW_BOTTLE_DOMAIN "https://mirrors.aliyun.com/homebrew-bottles"
+# Homebrew
+set -gx HOMEBREW_BREW_GIT_REMOTE "https://mirrors.cernet.edu.cn/homebrew/brew.git"
+set -gx HOMEBREW_CORE_GIT_REMOTE "https://mirrors.cernet.edu.cn/homebrew/homebrew-core.git"
+set -gx HOMEBREW_API_DOMAIN "https://mirrors.cernet.edu.cn/homebrew-bottles/api"
+set -gx HOMEBREW_BOTTLE_DOMAIN "https://mirrors.cernet.edu.cn/homebrew-bottles"
 set -gx HOMEBREW_NO_AUTO_UPDATE 1
+set -gx HOMEBREW_INSTALL_FROM_API 1
 
 # TestContainers / Docker
 set -gx DOCKER_HOST unix:///var/run/docker.sock
