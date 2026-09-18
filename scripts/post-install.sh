@@ -159,12 +159,20 @@ config_clipboard_history_in_spotlight() {
   killall cfprefsd
 }
 
+
+install_languagetools_extensions() {
+  echo "enable pnpm"
+  corepack enable pnpm
+}
+
+
 create_syslinks;
 config_gpg;
 # install_config_zsh;
 install_cofig_fish;
 shell_change;
 conig_mise;
+install_languagetools_extensions;
 config_ai_compresses;
 config_ai_agents;
 config_hot_corner;
