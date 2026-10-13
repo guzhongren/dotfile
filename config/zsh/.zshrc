@@ -1,69 +1,67 @@
 #!/bin/zsh
+
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
+export ZSH_DISABLE_COMPFIX=true
 
 ZSH_THEME="robbyrussell"
-
 HIST_STAMPS="mm/dd/yyyy"
-
-ZSH_CUSTOM="$ZSH/custom"
 
 plugins=(
   git
+  z
+  zsh-completions
   zsh-autosuggestions
   zsh-syntax-highlighting
-  zsh-completions
-  z
 )
 
 source "$ZSH/oh-my-zsh.sh"
 
-# fpath=(~/.zsh "$fpath")
-# autoload -Uz compinit
-# compinit -u
+# Aliases
+alias glol="git log --oneline --decorate --graph --date=local --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(white)%cd%Creset'"
+alias k='kubectl'
+alias ls='eza --icons'
+alias ll='eza -l --icons'
+alias rg='rg --hidden --glob "!.git"'
+alias cat='bat --paging=never'
+alias find='fd'
 
-alias ls='lsd'
-export GPG_TTY=$(tty)
+export EDITOR=vim
+export VISUAL=vim
+export GPG_TTY="$(tty)"
 
-# export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homberew/brew.git"
-#export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
-#export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"
+# Homebrew
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.cernet.edu.cn/homebrew/brew.git"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.cernet.edu.cn/homebrew/homebrew-core.git"
+export HOMEBREW_INSTALL_FROM_API=1
 export HOMEBREW_NO_INSTALL_CLEANUP=
 export HOMEBREW_NO_AUTO_UPDATE=true
 
-export ZSH_DISABLE_COMPFIX=true
-
-alias daily="cd '~/Library/Mobile\ Documents/iCloud\~com\~logseq\~logseq/Documents'"
-alias glol="git log --oneline --decorate --graph --date=local --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(white)%cd%Creset'"
-
-# direnv
-eval "$(direnv hook zsh)"
-
-# enable to download node-pre-gyp package
-export NODE_TLS_REJECT_UNAUTHORIZED=1
-
-# alias docker="podman"
-# export PODMAN_LOG_LEVEL=info
-# export DOCKER_HOST=unix:///Users/zhongren.gu/.local/share/containers/podman/machine/podman.sock
-# alias docker-compose="podman-compose"
-
-# export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
+# Docker / Testcontainers
+export DOCKER_HOST=unix:///var/run/docker.sock
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+export TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal
+export TESTCONTAINERS_RYUK_DISABLED=true
 
-# SSH config
-# Start the SSH agent if it's not already running
+# SSH agent
 if ! pgrep -u "$USER" ssh-agent >/dev/null; then
   eval "$(ssh-agent -s)"
 fi
 
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-*":$PNPM_HOME:"*) ;;
-*) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+# Tool initialization
+eval "$(direnv hook zsh)"
 eval "$(mise activate zsh)"
-alias k="kubectl"
+source <(fzf --zsh)
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
+# Paths
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:/opt/homebrew/opt/openjdk/bin:$HOME/.local/bin:$HOME/01.projects/01.repos/kubectl/bin:$PATH"
+export KUBECONFIG="$HOME/.kube/paas.yaml:$HOME/.kube/config"
 
 eval "$(starship init zsh)"
