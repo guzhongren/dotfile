@@ -163,9 +163,9 @@ config_clipboard_history_in_spotlight() {
 create_syslinks;
 config_gpg;
 install_config_zsh;
-install_config_fish;
+# install_config_fish;
 shell_change;
-conig_mise;
+config_mise;
 install_languagetools_extensions;
 config_ai_compresses;
 config_hot_corner;
