@@ -20,6 +20,7 @@ create_syslinks() {
 
   link_dotfile "${REPO_ROOT}/config/.gnupg/gpg-agent.conf" "$HOME/.gnupg/gpg-agent.conf"
   link_dotfile "${REPO_ROOT}/config/fish/config.fish" "$HOME/.config/fish/config.fish"
+  link_dotfile "${REPO_ROOT}/config/zsh/.zshrc" "$HOME/.zshrc"
   link_dotfile "${REPO_ROOT}/config/ghostty/config" "$HOME/.config/ghostty/config"
   link_dotfile "${REPO_ROOT}/config/starship/starship.toml" "$HOME/.config/starship.toml"
   link_dotfile "${REPO_ROOT}/config/zed/settings.json" "$HOME/.config/zed/settings.json"
@@ -65,7 +66,7 @@ install_config_zsh() {
       log_info "Oh My Zsh already installed at $ZSH_DIR"
   else
       log_install "Installing Oh My Zsh..."
-      RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
 
   export ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-${ZSH_DIR}/custom}"
@@ -77,7 +78,7 @@ install_config_zsh() {
 
 
 # ── Fisher ──────────────────────────
-install_cofig_fish() {
+install_config_fish() {
   echo ""
   echo "--- Setting up Fisher ---"
 
@@ -102,30 +103,31 @@ install_cofig_fish() {
 
 shell_change() {
   echo ""
-  if command_exists "fish"; then
-      grep -qxF '/opt/homebrew/bin/fish' /etc/shells || echo '/opt/homebrew/bin/fish' | sudo tee -a /etc/shells > /dev/null
+  if command_exists "zsh"; then
       CURRENT_SHELL="$(basename "$SHELL")"
-      FISH_PATH="$(which fish)"
-      if [ "$CURRENT_SHELL" = "fish" ]; then
-          log_info "Shell is already fish"
+      ZSH_PATH="$(command -v zsh)"
+      if [ "$CURRENT_SHELL" = "zsh" ]; then
+          log_info "Shell is already zsh"
       else
-          log_install "Changing default shell to fish..."
+          log_install "Changing default shell to zsh..."
           if [ -n "${CI:-}" ]; then
-              sudo chsh -s "$FISH_PATH"
+              sudo chsh -s "$ZSH_PATH" "$USER"
           else
-              chsh -s "$FISH_PATH"
+              chsh -s "$ZSH_PATH"
           fi
-          log_success "Shell changed to fish"
+          log_success "Shell changed to zsh"
       fi
   fi
 }
 
 # ── mise completion ────────────────
-conig_mise() {
+config_mise() {
   echo ""
   if command_exists "mise"; then
-      mise completion fish >/dev/null 2>&1 || true
-      log_info "mise fish completion generated"
+      MISE_COMPLETION_DIR="${ZSH_CUSTOM_DIR:-$HOME/.oh-my-zsh/custom}/completions"
+      mkdir -p "$MISE_COMPLETION_DIR"
+      mise completion zsh > "$MISE_COMPLETION_DIR/_mise"
+      log_info "mise zsh completion generated"
   fi
 }
 
@@ -133,18 +135,7 @@ config_ai_compresses() {
   mkdir -p ~/.claude
   rtk init -g --auto-patch
   rtk telemetry disable
-}
 
-config_ai_agents() {
-  echo ""
-  echo "--- Linking AI agents ---"
-
-  if [ -e "$HOME/.agents" ] && [ ! -L "$HOME/.agents" ]; then
-      log_warn "$HOME/.agents exists as a real file/directory; remove it first, then re-run."
-  else
-      ln -sfn "${REPO_ROOT}/docs/ai/agents" "$HOME/.agents"
-      log_info ".agents linked to docs/ai/agents"
-  fi
 }
 
 config_hot_corner() {
@@ -153,10 +144,8 @@ config_hot_corner() {
   killall Dock
 }
 
-config_clipboard_history_in_spotlight() {
-  defaults write com.apple.spotlight PasteboardHistoryEnabled -int 1
-  defaults write com.apple.spotlight PasteboardHistoryTimeout -int 604800
-  killall cfprefsd
+create_docker_volume(){
+  check_folder_exist_or_create "${HOME}/container-volume/db"
 }
 
 
@@ -165,17 +154,22 @@ install_languagetools_extensions() {
   corepack enable pnpm
 }
 
+config_clipboard_history_in_spotlight() {
+  defaults write com.apple.spotlight PasteboardHistoryEnabled -int 1
+  defaults write com.apple.spotlight PasteboardHistoryTimeout -int 604800
+  killall cfprefsd
+}
 
 create_syslinks;
 config_gpg;
-# install_config_zsh;
-install_cofig_fish;
+install_config_zsh;
+# install_config_fish;
 shell_change;
-conig_mise;
+config_mise;
 install_languagetools_extensions;
 config_ai_compresses;
-config_ai_agents;
 config_hot_corner;
 config_clipboard_history_in_spotlight;
+create_docker_volume;
 
 stage_footer "post-install"

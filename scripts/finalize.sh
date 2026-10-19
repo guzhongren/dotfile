@@ -18,7 +18,7 @@ check_tool() {
 
 check_tool "brew"
 check_tool "mise"
-check_tool "fish"
+check_tool "zsh"
 
 if [ -L "$HOME/.agents" ] && [ "$(readlink "$HOME/.agents")" = "${REPO_ROOT}/docs/ai/agents" ]; then
     log_info "  ~/.agents -> ${REPO_ROOT}/docs/ai/agents"
