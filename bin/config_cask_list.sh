@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034
 
 cast_list=(
-    "tencent-lemon"
+    # "tencent-lemon"
     "obsidian"
     "dbeaver-community"
     "ghostty"
