@@ -48,8 +48,16 @@ create_base_folders() {
   check_folder_exist_or_create "$HOME/02.personal"
 }
 
+config_ai_api_key_in_keychain() {
+  link_dotfile "${REPO_ROOT}/config/ai/api-key-helper.sh" "$HOME/.config/api-key-helper.sh"
+
+  todo "Execute below shell to config the api key of AI:
+  security add-generic-password -s ai-deepseek -a DEEPSEEK_API_KEY -w your-deepseek-api-key -U"
+}
+
 create_base_folders;
 show_ssh_todo;
 config_git_infra;
+config_ai_api_key_in_keychain;
 
 stage_footer "pre-config"

@@ -64,4 +64,13 @@ export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:/opt/homebrew/opt/openjdk/bin:$HOME/.local/bin:$HOME/01.projects/01.repos/kubectl/bin:$PATH"
 export KUBECONFIG="$HOME/.kube/paas.yaml:$HOME/.kube/config"
 
+# AI API Key
+if [[ -z "$DEEPSEEK_API_KEY" ]]; then
+  DEEPSEEK_API_KEY=$(security find-generic-password -s "ai-deepseek" -a "DEEPSEEK_API_KEY" -w 2>/dev/null)
+  [[ -n "$DEEPSEEK_API_KEY" ]] && export DEEPSEEK_API_KEY
+fi
+
+# AI proxy
+eval "$(rtk llm-proxy start --env)"
+
 eval "$(starship init zsh)"
