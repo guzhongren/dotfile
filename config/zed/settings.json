@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "disable_ai": true,
   "ui_font_family": "Maple Mono CN",
   "buffer_font_family": "Maple Mono CN",
   "icon_theme": "Catppuccin Frappé",
@@ -14,6 +15,12 @@
   "show_whitespaces": "all",
   "cli_default_open_behavior": "existing_window",
   "agent": {
+    "expand_edit_card": true,
+    "button": false,
+    "auto_generate_thread_titles": false,
+    "threads_sidebar": {
+      "auto_open": false
+    },
     "dock": "right",
     "favorite_models": [],
     "model_parameters": [],
