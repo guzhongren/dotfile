@@ -76,7 +76,9 @@ show_todo() {
     cat <<EOF
 I think you have installed some necessary softwares on your laptop now. But there are some things need to be done on your side.
 
-Import your GPG private/public key via gpg --import private/public.key
+1. Import your GPG private/public key via gpg --import private/public.key
+2. Execute below shell to config the api key of AI:
+  security add-generic-password -s ai-deepseek -a DEEPSEEK_API_KEY -w your-deepseek-api-key -U
 
 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
 🎉            Restart your termial to use config!             🎉

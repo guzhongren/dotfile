@@ -151,6 +151,7 @@ create_docker_volume(){
 
 install_languagetools_extensions() {
   echo "enable pnpm"
+  npm install -g corepack@latest
   corepack enable pnpm
 }
 
